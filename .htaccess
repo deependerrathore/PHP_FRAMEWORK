@@ -1,0 +1,15 @@
+RewriteEngine On
+
+#request filename is not a directory
+RewriteCond %{REQUEST_FILENAME} !-d
+
+#request filename is not a file
+RewriteCond %{REQUEST_FILENAME} !-f
+
+
+#skip conditions ^ = start of the string, $1 will hold the value
+RewriteCond $1 !^(config|fonts|css|js|core|robots/.txt)
+
+#The [L] flag causes mod_rewrite to stop processing the rule set. In most contexts, this means that if the rule matches, no further rules will be processed. similar to break statement
+#^(.+)$ means everything will be servered to index.php page
+RewriteRule ^(.+)$ index.php/$1 [L]
