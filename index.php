@@ -1,3 +1,3 @@
 <?php
 
-phpinfo();
+echo "PHP folder structure";
