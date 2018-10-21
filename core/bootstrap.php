@@ -8,13 +8,17 @@ require_once(ROOT . DS . 'app' . DS . 'libs' . DS . 'helpers' . DS . 'functions.
 
 //Autoload the class from controllers, modals and core folder
 function autoload($className){
+
     if (file_exists(ROOT . DS . 'app' . DS . 'controllers' . DS . $className . '.php')) {
         require_once(ROOT . DS . 'app' . DS . 'controllers' . DS . $className . '.php');
-    }else if(file_exists(ROOT . DS . 'core' . DS . $className . DS . '.php')){
-        require_once(ROOT . DS . 'core' . DS . $className . DS . '.php');
-    }else if(file_exists(ROOT . DS . 'app' . DS . 'modals' . DS . $className . '.php')){
+    }elseif(file_exists(ROOT . DS . 'core' . DS . $className . '.php')){
+        require_once(ROOT . DS . 'core' . DS . $className . '.php');
+    }elseif(file_exists(ROOT . DS . 'app' . DS . 'modals' . DS . $className . '.php')){
         require_once(ROOT . DS . 'app' . DS . 'modals' . DS . $className . '.php');
     }
 }
 
 spl_autoload_register('autoload');
+
+Router::route($url);
+
