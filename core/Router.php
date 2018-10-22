@@ -6,6 +6,11 @@ class Router{
         $controller = (!empty($url) && $url[0] != '') ? ucfirst($url[0]) : DEFAULT_CONTROLLER;//DEFAULT_CONTROLLER @config/config.php
         $controller_name = $controller;
         array_shift($url);
+
+        $action = (!empty($url) && $url[0] != '') ? lcfirst($url[0]) . 'Action' : 'indexAction';
+        $action_name = $action;
+        array_shift($url);
+        dnd($action);
     }
 
 }
