@@ -1,8 +1,8 @@
 <?php 
 
-class Users{
-    function indexAction($params = []){
-
+class Users extends Application{
+    function indexAction($params){
+        dnd($params);
     }
 
 }
