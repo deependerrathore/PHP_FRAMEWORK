@@ -19,11 +19,9 @@ class Router{
         $dispatch = new $controller($controller_name,$action_name);
 
         if(method_exists($controller,$action)){
-            if (sizeof($queryParams) > 0) {
-                call_user_func_array([$dispatch,$action],$queryParams); //$dispatch->$action($queryParams)
-            }else{
-                $dispatch->$action();
-            }
+            
+            call_user_func_array([$dispatch,$action],$queryParams); //$dispatch->$action($queryParams)
+           
         }else{
             echo "{$action} doesnot exist in the {$controller} controller"; 
         }
