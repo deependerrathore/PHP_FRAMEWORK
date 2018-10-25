@@ -50,7 +50,7 @@ class View{
         if($this->_outputBuffer == 'head'){
             $this->_head = ob_get_clean(); //assigning the data to _head and cleaning the ob
         }elseif($this->_outputBuffer == 'body'){
-            $this->_body = ob_end_clean(); //assigning the data to _body and cleaning the ob
+            $this->_body = ob_get_clean(); //assigning the data to _body and cleaning the ob
         }else{
             die('You must first the the strat method');
         }
