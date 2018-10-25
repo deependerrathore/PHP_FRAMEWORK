@@ -1,8 +1,7 @@
 <?php 
 
-class Users extends Application{
-    function indexAction($params){
-        dnd($params);
+class Users extends Controller{
+    function indexAction($params = []){
     }
 
 }
