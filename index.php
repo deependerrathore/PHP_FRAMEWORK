@@ -30,8 +30,12 @@ function autoload($className){
 spl_autoload_register('autoload');
 
 $db = DB::getInstance();
-
-$sql = 'SELECT * FROM contacts WHERE id = ?';
-
-dnd($db->query($sql,['id' => 1]));
+$fields = [
+    'fname' => 'Datar',
+    'lname' => 'Rathore',
+    'email' => 'datar@datar.com'
+];
+//$sql = 'SELECT * FROM contacts WHERE id = ?';
+//dnd($db->query($sql,[1]));
+$contacts = $db->insert('contacts',$fields);
 Router::route($url);

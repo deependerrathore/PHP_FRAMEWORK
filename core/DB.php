@@ -22,6 +22,7 @@ class DB{
         return self::$_instance;
     }
 
+    //query function will take sql query with parameter values which will be going to replaced with ?
     public function query($sql, $params = []){
         $_error = false;
         if ($this->_query = $this->_pdo->prepare($sql)) {
@@ -53,4 +54,31 @@ class DB{
         return $this;
     }
 
+    public function insert($table,$fields = []){
+        $fieldString = '';
+        $valueString = '';
+        $values = [];
+
+        foreach($fields as $field => $value){
+            $fieldString .= '`' . $field . '`,';
+            $valueString .= '?,';
+            $values[] = $value;
+        }
+        $fieldString = rtrim($fieldString,',');
+        $valueString = rtrim($valueString,',');
+
+        //forming the insert query
+        $sql = "INSERT INTO {$table} ({$fieldString}) VALUES ($valueString)";
+
+        //passing the sql to query function with parameter
+        if (!$this->query($sql,$values)->error()) {
+            return true;
+        }else{
+            return false;
+        }
+    }
+
+    public function error(){
+        return $this->_error;
+    }
 }
