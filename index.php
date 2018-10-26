@@ -31,6 +31,7 @@ spl_autoload_register('autoload');
 
 $db = DB::getInstance();
 
-$sql = 'SELECT * FROM contacts';
-$db->query($sql);
+$sql = 'SELECT * FROM contacts WHERE id = ?';
+
+dnd($db->query($sql,['id' => 1]));
 Router::route($url);
