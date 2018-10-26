@@ -31,4 +31,6 @@ spl_autoload_register('autoload');
 
 $db = DB::getInstance();
 
+$sql = 'SELECT * FROM contacts';
+$db->query($sql);
 Router::route($url);

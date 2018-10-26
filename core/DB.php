@@ -2,7 +2,7 @@
 
 class DB{
     private static $_instance = null;
-    private $_pdo ,$query,$_error = false, $_result,$count = 0 , $_lastInserID = null;
+    private $_pdo ,$_query,$_error = false, $_result,$_count = 0 , $_lastInserID = null;
 
     public function __construct()
     {
@@ -20,6 +20,14 @@ class DB{
         }
 
         return self::$_instance;
+    }
+
+    public function query($sql){
+        $_error = false;
+        $this->_query = $this->_pdo->prepare($sql);
+        $this->_query->execute();
+        $this->_result = $this->_query->fetchAll(PDO::FETCH_OBJ);
+        dnd($this->_result);
     }
 
 }
