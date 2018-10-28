@@ -114,6 +114,32 @@ class DB{
             return false;
         }
     }
+
+    //returns the results of the query from query() method
+    public function results(){
+        return $this->_result;
+    }
+
+    //return the first row of the query 
+    public function first(){
+        return (!empty($this->_result)) ? $this->_result[0] : [];
+    }
+
+    //returns the count for query from query() method
+    public function count(){
+        return $this->_count;
+    }
+    
+    //returns the columns details
+    public function get_columns($table){
+        return $this->query("SHOW COLUMNS FROM {$table}")->results();
+    }
+
+    //This will return last insert id
+    public function lastID(){
+        return $this->_lastInserID;
+    }
+    
     public function error(){
         return $this->_error;
     }

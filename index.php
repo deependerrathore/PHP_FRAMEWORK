@@ -35,9 +35,15 @@ $fields = [
     'lname' => 'Rathore',
     'email' => 'onkar@onkar.com'
 ];
-//$sql = 'SELECT * FROM contacts WHERE id = ?';
-//dnd($db->query($sql,[1]));
+$sql = 'SELECT * FROM contacts';
+$db->query($sql,[12]); 
 //$contacts = $db->insert('contacts',$fields);
+//dnd($db->get_columns('contacts')); //working
+//dnd($db->lastID());//working
+//dnd($db->results());//working
+//dnd($db->count());//working
+//dnd($db->first()); //working
+
 //$db->update('contacts',8,$fields);
-$db->delete('contacts',6);
+//$db->delete('contacts',6);
 Router::route($url);
