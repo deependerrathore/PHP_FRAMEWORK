@@ -38,5 +38,6 @@ $fields = [
 //$sql = 'SELECT * FROM contacts WHERE id = ?';
 //dnd($db->query($sql,[1]));
 //$contacts = $db->insert('contacts',$fields);
-$db->update('contacts',8,$fields);
+//$db->update('contacts',8,$fields);
+$db->delete('contacts',6);
 Router::route($url);

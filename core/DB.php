@@ -105,6 +105,15 @@ class DB{
         }
     }
 
+    public function delete($table,$id){
+        $sql = "DELETE FROM {$table} WHERE id = {$id}";
+
+        if (!$this->query($sql)->error()) {
+            return true;
+        }else{
+            return false;
+        }
+    }
     public function error(){
         return $this->_error;
     }
