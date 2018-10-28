@@ -54,6 +54,82 @@ class DB{
         return $this;
     }
 
+    protected function _read($table,$params=[]){
+        $conditionString = '';
+        $bind = [];
+        $order = '';
+        $limit = '';
+
+        //Conditions
+        if (isset($params['conditions'])) {
+            if(is_array($params['conditions'])){
+                foreach($params['conditions'] as $condition){
+                    $conditionString .= ' ' . $condition . ' AND' ;
+                }
+
+                $conditionString = trim($conditionString);
+                $conditionString = rtrim($conditionString,' AND');
+            }else{
+                $conditionString = $params['conditions'];
+            }
+
+            if($conditionString != ''){
+                $conditionString = ' WHERE ' . $conditionString;
+            }
+        }
+
+        //Binding
+        if(array_key_exists('bind',$params)){
+            $bind = $params['bind'];
+        }
+
+        //Order
+        if (array_key_exists('order',$params)) {
+            $order = ' ORDER BY ' . $params['order'];
+        }
+
+        //Limit 
+        if(array_key_exists('limit',$params)){
+            $limit = ' LIMIT ' . $params['limit'];
+        }
+
+        $sql = "SELECT * FROM {$table} {$conditionString} {$order} {$limit}"; 
+
+        if ($this->query($sql,$bind)) {
+            if(!count($this->_result)) return false;
+            return true;
+        }
+
+        return false;
+
+    }
+
+    /**
+     * @fun find
+     * Parameter:  
+     * table and parameters format = ['conditions' => ['lname = ?','fname = ?'],'bind' => ['singh','Narender'],'order' => "lname,fname",'limit' => 5]
+     */
+    public function find($table,$params = []){
+        if($this->_read($table,$params)){
+            return $this->results();
+        }
+         
+        return false;
+    }
+
+    /**
+     * @fun findFirst
+     * Parameter:  
+     * table and parameters format = ['conditions' => ['lname = ?','fname = ?'],'bind' => ['singh','Narender'],'order' => "lname,fname",'limit' => 5]
+     */
+    public function firstFirst($table,$params=[]){
+        if ($this->_read($table,$params)) {
+            return $this->first();
+        }
+
+        return false;
+    }
+
     /**
      * @fun insert
      * Parameter: table name , $array $fields = ['fname' => 'Onkar','lname' => 'Rathore','email' => 'onkar@onkar.com'];
@@ -139,7 +215,7 @@ class DB{
     public function lastID(){
         return $this->_lastInserID;
     }
-    
+
     public function error(){
         return $this->_error;
     }

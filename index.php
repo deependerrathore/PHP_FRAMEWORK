@@ -30,13 +30,13 @@ function autoload($className){
 spl_autoload_register('autoload');
 
 $db = DB::getInstance();
-$fields = [
-    'fname' => 'Onkar',
-    'lname' => 'Rathore',
-    'email' => 'onkar@onkar.com'
-];
-$sql = 'SELECT * FROM contacts';
-$db->query($sql,[12]); 
+// $fields = [
+//     'fname' => 'Onkar',
+//     'lname' => 'Rathore',
+//     'email' => 'onkar@onkar.com'
+// ];
+//$sql = 'SELECT * FROM contacts';
+//$db->query($sql,[12]); 
 //$contacts = $db->insert('contacts',$fields);
 //dnd($db->get_columns('contacts')); //working
 //dnd($db->lastID());//working
@@ -46,4 +46,13 @@ $db->query($sql,[12]);
 
 //$db->update('contacts',8,$fields);
 //$db->delete('contacts',6);
+
+$contacts = $db->find('contacts',[
+    'conditions' => ['lname = ?','fname = ?'],
+    'bind' => ['singh','Narender'],
+    'order' => "lname,fname",
+    'limit' => 5
+]);
+
+dnd($contacts);
 Router::route($url);
