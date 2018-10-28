@@ -47,9 +47,9 @@ $db = DB::getInstance();
 //$db->update('contacts',8,$fields);
 //$db->delete('contacts',6);
 
-$contacts = $db->find('contacts',[
+$contacts = $db->findFirst('contacts',[
     'conditions' => 'lname = ?',
-    'bind' => ['rathore'],
+    'bind' => ['singh'],
     'order' => "lname,fname",
     'limit' => 5
 ]);

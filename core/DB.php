@@ -122,7 +122,7 @@ class DB{
      * Parameter:  
      * table and parameters format = ['conditions' => ['lname = ?','fname = ?'],'bind' => ['singh','Narender'],'order' => "lname,fname",'limit' => 5]
      */
-    public function firstFirst($table,$params=[]){
+    public function findFirst($table,$params=[]){
         if ($this->_read($table,$params)) {
             return $this->first();
         }
