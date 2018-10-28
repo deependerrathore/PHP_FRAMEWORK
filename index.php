@@ -48,8 +48,8 @@ $db = DB::getInstance();
 //$db->delete('contacts',6);
 
 $contacts = $db->find('contacts',[
-    'conditions' => ['lname = ?','fname = ?'],
-    'bind' => ['singh','Narender'],
+    'conditions' => 'lname = ?',
+    'bind' => ['rathore'],
     'order' => "lname,fname",
     'limit' => 5
 ]);
