@@ -54,6 +54,10 @@ class DB{
         return $this;
     }
 
+    /**
+     * @fun insert
+     * Parameter: table name , $array $fields = ['fname' => 'Onkar','lname' => 'Rathore','email' => 'onkar@onkar.com'];
+     */
     public function insert($table,$fields = []){
         $fieldString = '';
         $valueString = '';
@@ -71,6 +75,29 @@ class DB{
         $sql = "INSERT INTO {$table} ({$fieldString}) VALUES ($valueString)";
 
         //passing the sql to query function with parameter
+        if (!$this->query($sql,$values)->error()) {
+            return true;
+        }else{
+            return false;
+        }
+    }
+
+    /**
+     * @fun update
+     * Parameter: table name , id, $array $fields = ['fname' => 'Onkar','lname' => 'Rathore','email' => 'onkar@onkar.com'];
+     */
+    public function update($table,$id,$fields){
+        $fieldString = '';
+        $valueString = '';
+        $values = [];
+        foreach($fields as $field => $value){
+            $fieldString .= ' '. $field . ' = ?, ';
+            $values[] = $value;
+        }
+        $fieldString = trim($fieldString);
+        $fieldString = rtrim($fieldString,',');
+        $sql = "UPDATE {$table} SET {$fieldString} WHERE id = {$id}";
+        
         if (!$this->query($sql,$values)->error()) {
             return true;
         }else{

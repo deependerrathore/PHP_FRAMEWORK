@@ -31,11 +31,12 @@ spl_autoload_register('autoload');
 
 $db = DB::getInstance();
 $fields = [
-    'fname' => 'Datar',
+    'fname' => 'Onkar',
     'lname' => 'Rathore',
-    'email' => 'datar@datar.com'
+    'email' => 'onkar@onkar.com'
 ];
 //$sql = 'SELECT * FROM contacts WHERE id = ?';
 //dnd($db->query($sql,[1]));
-$contacts = $db->insert('contacts',$fields);
+//$contacts = $db->insert('contacts',$fields);
+$db->update('contacts',8,$fields);
 Router::route($url);
