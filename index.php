@@ -54,5 +54,6 @@ $contacts = $db->findFirst('contacts',[
     'limit' => 5
 ]);
 
-dnd($contacts);
+//dnd($contacts);
+dnd($db->get_columns('contacts'));
 Router::route($url);
