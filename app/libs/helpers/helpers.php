@@ -7,3 +7,7 @@ function  dnd($data){
     echo '</pre>';
     die();
 }
+
+function sanatize($dirtyValue){
+    return htmlentities($dirtyValue,ENT_QUOTES,'UFT-8');
+}

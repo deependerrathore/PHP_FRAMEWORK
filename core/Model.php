@@ -92,10 +92,28 @@ class Model{
         return $this->_db->query($sql,$bind);
     }
 
-    
+    public function data(){
+        $data = new stdClass();
+        foreach($this->_columnsNames as $column){
+            $data->column = $this->column;
+        }
+
+        return $data;
+    }
+
+    public function assign($params = []){
+        if(!empty($params)){
+            foreach($params as $key => $value){
+                if(in_array($key,$this->_columnsNames)){
+                    $this->$key = sanatize($value);
+                }
+            }
+        }
+    }
     protected function populateObjData($result){
         foreach($result as $key => $value){
             $this->$key = $value;
         }
     }
+    
 }
