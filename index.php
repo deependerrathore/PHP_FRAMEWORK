@@ -22,8 +22,8 @@ function autoload($className){
         require_once(ROOT . DS . 'app' . DS . 'controllers' . DS . $className . '.php');
     }elseif(file_exists(ROOT . DS . 'core' . DS . $className . '.php')){
         require_once(ROOT . DS . 'core' . DS . $className . '.php');
-    }elseif(file_exists(ROOT . DS . 'app' . DS . 'modals' . DS . $className . '.php')){
-        require_once(ROOT . DS . 'app' . DS . 'modals' . DS . $className . '.php');
+    }elseif(file_exists(ROOT . DS . 'app' . DS . 'models' . DS . $className . '.php')){
+        require_once(ROOT . DS . 'app' . DS . 'models' . DS . $className . '.php');
     }
 }
 
@@ -47,13 +47,20 @@ $db = DB::getInstance();
 //$db->update('contacts',8,$fields);
 //$db->delete('contacts',6);
 
-$contacts = $db->findFirst('contacts',[
+$contacts = $db->find('contacts',[
     'conditions' => 'lname = ?',
     'bind' => ['singh'],
     'order' => "lname,fname",
     'limit' => 5
 ]);
 
+$mod = new Model('contacts');
+$mod->find([
+    'conditions' => 'lname = ?',
+    'bind' => ['singh'],
+    'order' => "lname,fname",
+    'limit' => 5
+]);
 //dnd($contacts);
-dnd($db->get_columns('contacts'));
+//dnd($db->get_columns('contacts'));
 Router::route($url);
