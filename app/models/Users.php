@@ -41,7 +41,31 @@ class Users extends Model{
         ]);
     }
 
-    
+    public function login($rememberMe = false){
+
+        //set the session with the ID
+        Session::set($this->_sessionName,$this->id);
+
+        if ($rememberMe) {
+
+            //generate a unique hash that we will be using in session and cookie
+            $hash = md5(uniqid() + rand(0,100));
+
+            //getting the useragent from Session class
+            $user_agent = Session::uagent_no_version();
+
+            //set the cookie with the hash value
+            Cookie::set($this->_cookieName,$hash,REMEMBER_ME_COOKIE_EXPIRY);
+            
+            $fields = [
+                'session' => $hash,
+                'user_agent' =>$user_agent,
+                'user_id' => $this->id
+            ];
+            $this->_db->query("DELETE FROM user_sessioins WHERE user_id = ? AND user_agent= ?",[$this->id,$user_agent]);
+            $this->_db->insert('user_sessions',$fields);
+        }   
+    }
 
     
 }
