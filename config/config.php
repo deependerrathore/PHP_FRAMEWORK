@@ -12,3 +12,9 @@ define('DB_NAME','mvc');
 define('DB_USER','root');
 define('DB_PASSWORD','root');
 define('DB_HOST','127.0.0.1');
+
+define('CURRENT_USER_SESSION_NAME','eAfjsdklf93fdl84dfdslsdnsqAdklls');//Session name for the logged in user
+
+define('REMEMBER_ME_COOKIE_NAME','flsjdflsjdumfswr3434dfmsdfmfdsmf');//cooke name for logged in user remember me
+
+define('REMEMBER_ME_COOKIE_EXPIRY',604800); // time in seconds for memeber me cookie,expiry 7days
