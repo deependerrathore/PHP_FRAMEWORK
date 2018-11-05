@@ -47,7 +47,6 @@ class Users extends Model{
         Session::set($this->_sessionName,$this->id);
 
         if ($rememberMe) {
-
             //generate a unique hash that we will be using in session and cookie
             $hash = md5(uniqid() + rand(0,100));
 
@@ -62,7 +61,8 @@ class Users extends Model{
                 'user_agent' =>$user_agent,
                 'user_id' => $this->id
             ];
-            $this->_db->query("DELETE FROM user_sessioins WHERE user_id = ? AND user_agent= ?",[$this->id,$user_agent]);
+            $this->_db->query("DELETE FROM user_sessions WHERE user_id = ? AND user_agent = ?", [$this->id,$user_agent]);
+
             $this->_db->insert('user_sessions',$fields);
         }   
     }

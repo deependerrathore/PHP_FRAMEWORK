@@ -24,7 +24,7 @@
                         <input type="password" class="form-control" id="password" name="password" placeholder="Password">
                     </div>
                     <div class="form-check">
-                        <input type="checkbox" class="form-check-input" id="remember_me" value="on">
+                        <input type="checkbox" class="form-check-input" id="remember_me" name="remember_me" value="on">
                         <label class="form-check-label" for="remember_me">Remember Me</label>
                     </div>
 

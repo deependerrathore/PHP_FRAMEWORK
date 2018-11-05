@@ -47,20 +47,20 @@ $db = DB::getInstance();
 //$db->update('contacts',8,$fields);
 //$db->delete('contacts',6);
 
-$contacts = $db->find('contacts',[
-    'conditions' => 'lname = ?',
-    'bind' => ['singh'],
-    'order' => "lname,fname",
-    'limit' => 5
-]);
+// $contacts = $db->find('contacts',[
+//     'conditions' => 'lname = ?',
+//     'bind' => ['singh'],
+//     'order' => "lname,fname",
+//     'limit' => 5
+// ]);
 
-$mod = new Model('contacts');
-$mod->find([
-    'conditions' => 'lname = ?',
-    'bind' => ['singh'],
-    'order' => "lname,fname",
-    'limit' => 5
-]);
+// $mod = new Model('contacts');
+// $mod->find([
+//     'conditions' => 'lname = ?',
+//     'bind' => ['singh'],
+//     'order' => "lname,fname",
+//     'limit' => 5
+// ]);
 //dnd($contacts);
 //dnd($db->get_columns('contacts'));
 Router::route($url);
