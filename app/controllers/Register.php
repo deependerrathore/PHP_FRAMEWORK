@@ -7,6 +7,7 @@ class Register extends Controller{
     }
 
     public function loginAction(){
+        Session::uagent_no_version();
         $this->view->render('register/login');
     }
 }
