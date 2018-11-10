@@ -32,4 +32,21 @@ class Router{
         }
     }
 
+    public static function redirect($location){
+        if(!headers_sent()){
+            header('Location:'.PROJECT_ROOT.$location);
+            exit();
+        }else{
+            echo '<script type="text/javascript">';
+            echo 'windown.location.href="' . PROJECT_ROOT.$location.'";';
+            echo '<script>';
+
+            echo '<noscript>';
+            echo '<meta http-equiv="refresh" contect=0;url='.$location.'"/>';
+            echo '</noscript>';
+
+            exit();
+        }
+    }
+
 }

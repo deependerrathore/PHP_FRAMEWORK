@@ -24,7 +24,6 @@ class Users extends Model{
                     'bind' => [$user]
                 ]);
             }
-
             if($u){
                 foreach($u as $key => $value){
                     $this->$key = $value;
@@ -45,7 +44,7 @@ class Users extends Model{
 
         //set the session with the ID
         Session::set($this->_sessionName,$this->id);
-
+        
         if ($rememberMe) {
             //generate a unique hash that we will be using in session and cookie
             $hash = md5(uniqid() + rand(0,100));
