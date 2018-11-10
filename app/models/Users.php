@@ -40,6 +40,16 @@ class Users extends Model{
         ]);
     }
 
+    public static function currentLoggedInUser(){
+        if(!isset(self::$currentLoggedInUser) && Session::exists(CURRENT_USER_SESSION_NAME)){
+
+            $u = new Users((int)Session::get(CURRENT_USER_SESSION_NAME));
+
+            self::$currentLoggedInUser = $u;
+        }
+        return self::$currentLoggedInUser;
+    }
+
     public function login($rememberMe = false){
 
         //set the session with the ID
@@ -66,5 +76,16 @@ class Users extends Model{
         }   
     }
 
+    public function logout(){
+        $user_agent = Session::uagent_no_version();
+        $this->_db->query("DELETE FROM user_sessions WHERE user_id = ? AND user_agent = ?",[$this->id,$user_agent]);
+        Session::delete(CURRENT_USER_SESSION_NAME);
+        if(Cookie::exists(REMEMBER_ME_COOKIE_NAME)){
+            Cookie::delete(REMEMBER_ME_COOKIE_NAME,REMEMBER_ME_COOKEI_EXPIRY);
+        }
+        self::$currentLoggedInUser = null;
+        return true;
+
+    }
     
 }

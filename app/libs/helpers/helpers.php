@@ -11,3 +11,7 @@ function  dnd($data){
 function sanatize($dirtyValue){
     return htmlentities($dirtyValue,ENT_QUOTES,'UFT-8');
 }
+
+function currentUser(){
+    return Users::currentLoggedInUser();
+}

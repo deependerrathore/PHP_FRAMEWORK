@@ -12,6 +12,13 @@ class Register extends Controller{
         $this->view->setLayout('default');
     }
     
+    public function logoutAction(){
+        if(currentUser()){
+            currentUser()->logout();
+        }
+
+        Router::redirect('register/login');
+    }
     public function loginAction(){
         
         $validation = new Validate();
@@ -51,4 +58,5 @@ class Register extends Controller{
                 $this->view->render('register/login');
             }
         }
+        
         

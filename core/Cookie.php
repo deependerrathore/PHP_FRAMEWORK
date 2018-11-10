@@ -9,8 +9,8 @@ class Cookie{
         return false;
     }
 
-    public static function delete($name){
-        self::set($name,'',time() - 1);
+    public static function delete($name,$expiry){
+        self::set($name,'',$expiry - 1000);
     }
 
     public static function get($name){
