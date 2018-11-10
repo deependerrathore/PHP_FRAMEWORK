@@ -15,6 +15,8 @@
                 <h3 class="text-center">Login To Your Account</h3>
                 <p class="text-center">Get Unlimited tips,response questions<br/> free all the time</p>
                 <form action="<?=PROJECT_ROOT?>register/login" class="login" method="POST">
+                    <div class="bg-danger"><?=$this->displayErrors?></div>
+
                     <div class="form-group">
                         <label for="username">Username</label>
                         <input type="text" class="form-control" id="username" name="username" placeholder="Enter Your Username">

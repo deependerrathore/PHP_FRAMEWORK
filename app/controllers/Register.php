@@ -27,7 +27,9 @@ class Register extends Controller{
                 ],
                 'password' => [
                     'display' => "Password",
-                    'required' => true
+                    'required' => true,
+                    'min' => 6,
+                    'max' => 20
                     ]
                     ]);
                     
@@ -40,9 +42,12 @@ class Register extends Controller{
                             $remember = (isset($_POST['remember_me']) && Input::get('remember_me')) ? true : false;
                             $user->login($remember); //since $user is the object we can call method on it
                             Router::redirect('');
+                        }else{
+                            $validation->addError("There is something wrong with your username or password.");
                         }
                     }
                 }
+                $this->view->displayErrors = $validation->displayErrors();
                 $this->view->render('register/login');
             }
         }
