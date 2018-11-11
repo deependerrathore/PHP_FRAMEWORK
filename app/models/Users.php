@@ -62,9 +62,9 @@ class Users extends Model{
             //getting the useragent from Session class
             $user_agent = Session::uagent_no_version();
 
+
             //set the cookie with the hash value
             Cookie::set($this->_cookieName,$hash,REMEMBER_ME_COOKIE_EXPIRY);
-            
             $fields = [
                 'session' => $hash,
                 'user_agent' =>$user_agent,
