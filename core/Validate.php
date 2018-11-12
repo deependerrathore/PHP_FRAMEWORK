@@ -43,8 +43,8 @@ class Validate{
                         }
                         break;
                         case 'matches':
-                        if($value != $source[$rule_value]){
-                            $matchDisplay = $item[$rule_value][$display];
+                        if($value != $source[$rule_value]){//eg . confirm text field value != $_POST['password']
+                            $matchDisplay = $items[$rule_value]['display'];
                             $this->addError(["{$matchDisplay} and {$display} must match.",$item]);
                         } 
                         break;
