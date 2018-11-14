@@ -17,6 +17,8 @@ class DB{
     }
 
     public static function getInstance(){
+
+        //check if instance is already set, if not create a new DB instance
         if(!isset(self::$_instance)){
             self::$_instance = new DB();
         }

@@ -20,3 +20,5 @@ define('REMEMBER_ME_COOKIE_NAME','cookienameflsjdflsjdumfswr3434dfmsdfmfdsmf');/
 define('REMEMBER_ME_COOKIE_EXPIRY',604800); // time in seconds for memeber me cookie,expiry 7days
 
 define('ACCESS_RESTRICTED','Restricted'); //controller name for the restricted redirect
+
+define('MENU_BRAND','EVENTUNACADEMY');

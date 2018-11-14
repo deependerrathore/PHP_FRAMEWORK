@@ -13,6 +13,9 @@
     <?=$this->content('head');?>
 </head>
 <body>
-    <?=$this->content('body');?>
+    <?php include('main_menu.php'); ?>
+    <div class="container-fluid" style="min-height:cal(100% - 125px);">
+        <?=$this->content('body');?>
+    </div>
 </body>
 </html>

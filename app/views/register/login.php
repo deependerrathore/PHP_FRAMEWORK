@@ -3,11 +3,6 @@
 <?php $this->end();?>
 
 <?php $this->start('body');?>
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <div class="navbar-header">
-        <a href="#" class="navbar-brand">Event Unacademy</a>
-    </div>
-</nav>
 
 <div class="container">
     <div class="row">
