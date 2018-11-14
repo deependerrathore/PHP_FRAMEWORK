@@ -25,7 +25,6 @@ class Register extends Controller{
 
         $posted_values = ['fname'=>'','lname'=>'','email'=>'','username'=>'','password'=>'','confirm'=>'',];
         if($_POST){
-
             $posted_values = posted_values($_POST);
             $validation->check($_POST,[
                 'fname' => [
@@ -50,6 +49,7 @@ class Register extends Controller{
                     'unique' =>'users',
                     'min' => 6,
                     'max' => 150,
+                    'valid_username' => true
                 ],
                 'password' => [
                     'display' => 'Password',

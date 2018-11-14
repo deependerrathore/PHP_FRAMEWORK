@@ -74,6 +74,11 @@ class Validate{
                             $this->addError(["{$display} must be a right email address.",$item]);
                         }
                         break;
+                        case 'valid_username':
+                        if(!preg_match('/^[a-zA-Z0-9_]+$/',$value)){
+                            $this->addError(["{$display} must be valid. only _ is acceptable as special character.",$item]);
+                        }
+                        break;
                     }
                 }
             }

@@ -106,6 +106,7 @@ class Users extends Model{
     public function registerNewUser($params){
         $this->assign($params);
         $this->deleted = 0;
+        $this->whenaccountcreated = $date = date('Y-m-d H:i:s');
         $this->password = password_hash($this->password,PASSWORD_DEFAULT);
         $this->save();
     }
