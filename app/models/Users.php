@@ -70,15 +70,15 @@ class Users extends Model{
                 'user_agent' =>$user_agent,
                 'user_id' => $this->id
             ];
-            $this->_db->query("DELETE FROM login_tokens WHERE user_id = ? AND user_agent = ?", [$this->id,$user_agent]);
+            $this->_db->query("DELETE FROM user_sessions WHERE user_id = ? AND user_agent = ?", [$this->id,$user_agent]);
 
-            $this->_db->insert('login_tokens',$fields);
+            $this->_db->insert('user_sessions',$fields);
         }   
     }
 
     public static function loginUserFromCookie(){
         $userSession = UserSessions::getFromCookie();
-
+        
         if($userSession->user_id != ''){
             $user= new Self((int)$userSession->user_id);
         }else{
@@ -101,6 +101,16 @@ class Users extends Model{
         self::$currentLoggedInUser = null;
         return true;
 
+    }
+
+    public function logoutAll(){
+        $userSession = UserSessions::deleteCookiesFromAllDevice();
+        Session::delete(CURRENT_USER_SESSION_NAME);
+        if(Cookie::exists(REMEMBER_ME_COOKIE_NAME)){
+            Cookie::delete(REMEMBER_ME_COOKIE_NAME,REMEMBER_ME_COOKEI_EXPIRY);
+        }
+        self::$currentLoggedInUser = null;
+        return true;
     }
 
     public function registerNewUser($params){

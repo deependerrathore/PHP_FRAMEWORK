@@ -12,13 +12,21 @@ class Register extends Controller{
         $this->view->setLayout('default');
     }
     
-    public function logoutAction(){
-        if(currentUser()){
-            currentUser()->logout();
+    public function logoutAction($params = ''){
+        if ($params == 'all') {
+            if(currentUser()){
+                currentUser()->logoutAll();
+            }
+        }else{
+            if(currentUser()){
+                currentUser()->logout();
+            }
         }
+        
 
         Router::redirect('register/login');
     }
+
 
     public function registerAction(){
         $validation = new Validate();

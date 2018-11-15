@@ -10,5 +10,8 @@
     "Google":"https://www.google.com",
     "PHP Docs" : "https://php.net/manual/en",
     "Login" : "register/login",
-    "Logout" : "register/logout"
+    "Logout" : {
+        "Logout":"register/logout",
+        "Logout from all devices" : "register/logout/all"
+    }
 }

@@ -29,7 +29,6 @@ class Model{
     public function find($params = []){
         $results = [];
         $resultQuery = $this->_db->find($this->_table,$params);
-
         foreach($resultQuery as $result){
             $obj = new $this->_modelName($this->_table);
             $this->populateObjData($result);
