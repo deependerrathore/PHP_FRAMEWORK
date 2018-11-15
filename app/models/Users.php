@@ -57,22 +57,22 @@ class Users extends Model{
         
         if ($rememberMe) {
             //generate a unique hash that we will be using in session and cookie
-            $hash = md5(uniqid() + rand(0,100));
-
+            $cstrong = TRUE;
+            $token =  bin2hex(openssl_random_pseudo_bytes(64,$cstrong));
             //getting the useragent from Session class
             $user_agent = Session::uagent_no_version();
 
 
             //set the cookie with the hash value
-            Cookie::set($this->_cookieName,$hash,REMEMBER_ME_COOKIE_EXPIRY);
+            Cookie::set($this->_cookieName,$token,REMEMBER_ME_COOKIE_EXPIRY);
             $fields = [
-                'session' => $hash,
+                'token' => sha1($token),
                 'user_agent' =>$user_agent,
                 'user_id' => $this->id
             ];
-            $this->_db->query("DELETE FROM user_sessions WHERE user_id = ? AND user_agent = ?", [$this->id,$user_agent]);
+            $this->_db->query("DELETE FROM login_tokens WHERE user_id = ? AND user_agent = ?", [$this->id,$user_agent]);
 
-            $this->_db->insert('user_sessions',$fields);
+            $this->_db->insert('login_tokens',$fields);
         }   
     }
 
