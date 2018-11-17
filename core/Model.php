@@ -97,7 +97,7 @@ class Model{
     public function data(){
         $data = new stdClass();
         foreach($this->_columnsNames as $column){
-            $data->column = $this->column;
+            $data->$column = $this->$column;
         }
 
         return $data;

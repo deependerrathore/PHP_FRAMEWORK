@@ -13,7 +13,7 @@ class Controller extends Application{
 
     protected function load_model($model){
         if(class_exists($model)){
-            $this->{$model.'Model'} = new $model(strtolower($model));        
+            $this->{$model.'Model'} = new $model(strtolower($model));  
         }
     }
 }

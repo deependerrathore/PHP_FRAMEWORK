@@ -11,7 +11,6 @@ class Users extends Model{
         $this->_sessionName = CURRENT_USER_SESSION_NAME;
         $this->_cookieName = REMEMBER_ME_COOKIE_NAME;
         $this->_softDelete = true;
-
         if($user != ''){
             if(is_int($user)){
                 $u = $this->_db->findFirst('users',[
@@ -29,8 +28,9 @@ class Users extends Model{
                     $this->$key = $value;
                 }
             }
+
         }
-        
+
     }
 
     public function findByUsername($username){
@@ -127,7 +127,8 @@ class Users extends Model{
     }
 
     public function changePassword($params){
-        
+        $user = new Users(currentUser()->id);
+        dnd($user->data());
         $changedPassword = password_hash($params['newpassword'],PASSWORD_DEFAULT);
         $fields = [
             'password' => $changedPassword
