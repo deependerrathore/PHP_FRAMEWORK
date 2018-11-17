@@ -128,13 +128,15 @@ class Users extends Model{
 
     public function changePassword($params){
         $user = new Users(currentUser()->id);
-        dnd($user->data());
-        $changedPassword = password_hash($params['newpassword'],PASSWORD_DEFAULT);
-        $fields = [
-            'password' => $changedPassword
-        ];
-        $this->update(currentUser()->id,$fields);
-        return true;
+        $user->password = "Deepender";
+        $user->save();
+
+        // $changedPassword = password_hash($params['newpassword'],PASSWORD_DEFAULT);
+        // $fields = [
+        //     'password' => $changedPassword
+        // ];
+        // $this->update(currentUser()->id,$fields);
+        // return true;
     }
     
 }
