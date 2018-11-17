@@ -48,6 +48,12 @@ class Validate{
                             $this->addError(["{$matchDisplay} and {$display} must match.",$item]);
                         } 
                         break;
+                        case 'not_matches'://This needs to be changed so that first we will verfy the last saved password
+                        if($value == $source[$rule_value]){
+                            $matchDisplay = $items[$rule_value]['display'];
+                            $this->addError(["{$matchDisplay} and {$display} should not match.",$item]);
+                        } 
+                        break;
                         case 'unique':
                         $check = $this->_db->query("SELECT {$item} FROM {$rule_value} WHERE {$item} = ?",[$value]);
                         if($check->count()){

@@ -125,5 +125,15 @@ class Users extends Model{
         if(empty($this->acl)) return [];
         return json_decode($this->acl,true);
     }
+
+    public function changePassword($params){
+        
+        $changedPassword = password_hash($params['newpassword'],PASSWORD_DEFAULT);
+        $fields = [
+            'password' => $changedPassword
+        ];
+        $this->update(currentUser()->id,$fields);
+        return true;
+    }
     
 }

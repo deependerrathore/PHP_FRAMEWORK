@@ -10,6 +10,7 @@
             "Register":["login","register"]
         },
         "Register":["logout"],
-        "Tools" : ["*"]
+        "Tools" : ["*"],
+        "Profile":["changepassword"]
     }
 }
