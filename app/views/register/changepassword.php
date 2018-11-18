@@ -9,7 +9,7 @@
         <div class="col-md-6 offset-md-3 well">
                 <h3 class="text-center">Change Password</h3>
                 <p class="text-center">Get Unlimited tips,response questions<br/> free all the time</p>
-                <form action="<?=PROJECT_ROOT?>profile/changepassword" class="login" method="POST">
+                <form action="<?=PROJECT_ROOT?>register/changepassword" class="login" method="POST">
                     <div class="bg-danger"><?=$this->displayErrors?></div>
 
                     <div class="form-group">

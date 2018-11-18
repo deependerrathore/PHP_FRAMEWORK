@@ -9,8 +9,7 @@
         "denied":{
             "Register":["login","register","forgotpassword"]
         },
-        "Register":["logout"],
-        "Tools" : ["*"],
-        "Profile":["changepassword"]
+        "Register":["logout","changepassword"],
+        "Tools" : ["*"]
     }
 }

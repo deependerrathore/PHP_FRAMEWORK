@@ -120,6 +120,40 @@ class Register extends Controller{
                 $this->view->render('register/login');
     }
 
+    public function changepasswordAction(){
+        $validation = new Validate();
+
+        if($_POST){
+            $validation->check($_POST,[
+                'oldpassword' => [
+                    'display' => 'Old Password',
+                    'required' => true
+                ],
+                'newpassword' => [
+                    'display' => 'New Password',
+                    'required' => true,
+                    'not_matches' => 'oldpassword'
+                ],
+                'confirmnewpassword' => [
+                    'display' => 'Comfirm New Password',
+                    'required' => true,
+                    'matches' => 'newpassword'
+                ]
+            ]);
+
+            if($validation->passed()){
+                if (password_verify(Input::get('oldpassword'),currentUser()->password)) {
+                    $this->UsersModel->changePassword($_POST);
+                    Router::redirect('');//Need to add alert message
+                }else{
+                    $validation->addError("There is something wrong with your current password.");
+                }
+            }
+        }
+        $this->view->displayErrors = $validation->displayErrors();
+        $this->view->render('register/changepassword');
+    }
+
     public function forgotpasswordAction(){
         $validation = new Validate();
 
@@ -139,7 +173,7 @@ class Register extends Controller{
                 $user = $this->UsersModel->findByEmail($_POST['email']);
                 if($user->email != NULL || $user->email != ''){
                     PasswordTokens::savePasswordToken($user->id);
-                    Router::redirect(''); //Need to add error message 
+                    Router::redirect(''); //Need to add alert message 
                 }else{
                     $validation->addError("Email Address not found.Please check your email address again.");
                 }
