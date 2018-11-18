@@ -122,6 +122,7 @@ class Register extends Controller{
 
     public function changepasswordAction(){
         $validation = new Validate();
+        
 
         if($_POST){
             $validation->check($_POST,[
@@ -143,7 +144,7 @@ class Register extends Controller{
 
             if($validation->passed()){
                 if (password_verify(Input::get('oldpassword'),currentUser()->password)) {
-                    $this->UsersModel->changePassword($_POST);
+                    $this->UsersModel->changePassword(currentUser()->id,$_POST);
                     Router::redirect('');//Need to add alert message
                 }else{
                     $validation->addError("There is something wrong with your current password.");
@@ -172,8 +173,9 @@ class Register extends Controller{
             if ($validation->passed()) {
                 $user = $this->UsersModel->findByEmail($_POST['email']);
                 if($user->email != NULL || $user->email != ''){
-                    PasswordTokens::savePasswordToken($user->id);
-                    Router::redirect(''); //Need to add alert message 
+                    $passwordTokenObj = new PasswordTokens();
+                    $passwordTokenObj->savePasswordToken($user->id);
+                    Router::redirect(''); //Need to add alert message
                 }else{
                     $validation->addError("Email Address not found.Please check your email address again.");
                 }
@@ -182,8 +184,55 @@ class Register extends Controller{
 
         $this->view->displayErrors = $validation->displayErrors();
         $this->view->render('register/forgotpassword');
+
     }
-    
+
+    public function resetpasswordAction(){
+        $validation = new Validate();
+        
+        if (isset($_GET['token'])) {
+            $token = $_GET['token'];
+            $passwordTokenObj = new PasswordTokens();
+            $tokenData = $passwordTokenObj->findfirst([
+            'conditions' => ['token =?'],
+            'bind' => [sha1($token)]
+            ]); 
+            if($_POST){
+                $validation->check($_POST,[
+                    'newpassword' => [
+                        'display' => 'New Password',
+                        'required' => true,
+                    ],
+                    'confirmnewpassword' => [
+                        'display' => 'Comfirm New Password',
+                        'required' => true,
+                        'matches' => 'newpassword'
+                    ]
+                ]); 
+                if($validation->passed()){
+                    if($tokenData && (sha1($_GET['token']) == $tokenData->token)){
+                        $this->UsersModel->changePassword($tokenData->user_id,$_POST);
+                        $passwordTokenObj->delete($tokenData->id);
+                        Router::redirect('');//Need to add alert message
+                    }else{
+                        $validation->addError("Invalid Token. Please try again.");
+                    }
+                }
+                
+            }
+            $this->view->token = $token;
+            $this->view->displayErrors = $validation->displayErrors();
+            $this->view->render('register/resetpassword');
+
+        }else{
+            Router::redirect('restircted');
+        }
+
+
+         
+        
+    }
+
 }
     
     

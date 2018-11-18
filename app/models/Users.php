@@ -133,16 +133,15 @@ class Users extends Model{
         return json_decode($this->acl,true);
     }
 
-    public function changePassword($params){
+    public function changePassword($userid,$params){
         // $user = new Users(currentUser()->id);
         // $user->password = password_hash($params['newpassword'],PASSWORD_DEFAULT);
         // $user->save();
-
         $changedPassword = password_hash($params['newpassword'],PASSWORD_DEFAULT);
         $fields = [
             'password' => $changedPassword
         ];
-        $this->update(currentUser()->id,$fields);
+        $this->update($userid,$fields);
         return true;
     }
     

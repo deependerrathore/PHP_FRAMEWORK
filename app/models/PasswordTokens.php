@@ -6,14 +6,17 @@ class PasswordTokens extends Model{
         parent::__construct($table);    
     }
 
-    public static function savePasswordToken($userid){
-        $passwordTokenObj = new self();
+    public function savePasswordToken($userid){
         $cstrong = TRUE;
         $token =  bin2hex(openssl_random_pseudo_bytes(64,$cstrong));
+
+        //mail() Have to send mail from here
         $fields = [
             'token' => sha1($token),
             'user_id' => $userid
         ];
-        $passwordTokenObj->insert($fields);
+        $this->insert($fields);
+
+        return $token;
     }
 }
