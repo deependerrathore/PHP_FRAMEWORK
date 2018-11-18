@@ -40,6 +40,13 @@ class Users extends Model{
         ]);
     }
 
+    public function findByEmail($email){
+        return $this->findFirst([
+            'conditions' => 'email = ?',
+            'bind' => [$email]
+        ]);
+    }
+
     public static function currentLoggedInUser(){
         if(!isset(self::$currentLoggedInUser) && Session::exists(CURRENT_USER_SESSION_NAME)){
 
@@ -127,16 +134,17 @@ class Users extends Model{
     }
 
     public function changePassword($params){
-        $user = new Users(currentUser()->id);
-        $user->password = "Deepender";
-        $user->save();
+        // $user = new Users(currentUser()->id);
+        // $user->password = password_hash($params['newpassword'],PASSWORD_DEFAULT);
+        // $user->save();
 
-        // $changedPassword = password_hash($params['newpassword'],PASSWORD_DEFAULT);
-        // $fields = [
-        //     'password' => $changedPassword
-        // ];
-        // $this->update(currentUser()->id,$fields);
-        // return true;
+        $changedPassword = password_hash($params['newpassword'],PASSWORD_DEFAULT);
+        $fields = [
+            'password' => $changedPassword
+        ];
+        $this->update(currentUser()->id,$fields);
+        return true;
     }
+    
     
 }

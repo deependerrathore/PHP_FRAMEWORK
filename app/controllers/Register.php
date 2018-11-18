@@ -81,14 +81,14 @@ class Register extends Controller{
         $this->view->displayErrors = $validation->displayErrors();
         $this->view->render('register/register');
     }
+
+    
     public function loginAction(){
         
         $validation = new Validate();
         
         if($_POST){
             //form validation 
-            
-            
             $validation->check($_POST,[
                 'username' =>[
                     'display' =>"Username",
@@ -118,8 +118,40 @@ class Register extends Controller{
                 }
                 $this->view->displayErrors = $validation->displayErrors();
                 $this->view->render('register/login');
+    }
+
+    public function forgotpasswordAction(){
+        $validation = new Validate();
+
+        if($_POST){
+
+            $validation->check($_POST,[
+                'email' => [
+                    'display' => 'Email',
+                    'required' => true,
+                    'min' => 6,
+                    'max' => 150,
+                    'valid_email' => true
+                ]
+            ]);
+
+            if ($validation->passed()) {
+                $user = $this->UsersModel->findByEmail($_POST['email']);
+                if($user->email != NULL || $user->email != ''){
+                    PasswordTokens::savePasswordToken($user->id);
+                    Router::redirect(''); //Need to add error message 
+                }else{
+                    $validation->addError("Email Address not found.Please check your email address again.");
+                }
             }
         }
+
+        $this->view->displayErrors = $validation->displayErrors();
+        $this->view->render('register/forgotpassword');
+    }
+    
+}
+    
     
         
         

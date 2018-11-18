@@ -2,12 +2,12 @@
     "Guest":{
         "denied" : {},
         "Home" :["*"],
-        "Register": ["login","register"],
+        "Register": ["login","register","forgotpassword"],
         "Restricted": ["*"]
     },
     "LoggedIn":{
         "denied":{
-            "Register":["login","register"]
+            "Register":["login","register","forgotpassword"]
         },
         "Register":["logout"],
         "Tools" : ["*"],
