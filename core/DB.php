@@ -117,7 +117,6 @@ class DB{
         if($this->_read($table,$params)){
             return $this->results();
         }
-         
         return false;
     }
 

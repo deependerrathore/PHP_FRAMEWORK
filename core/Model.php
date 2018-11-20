@@ -26,18 +26,34 @@ class Model{
         return $this->_db->get_columns($this->_table);
     }
 
+    // public function find($params = []){
+    //     $results = [];
+    //     $resultQuery = $this->_db->find($this->_table,$params);
+    //     if ($resultQuery) {
+    //         foreach($resultQuery as $result){
+    //             $obj = new $this->_modelName($this->_table);
+    //             $obj->populateObjData($result);
+    //             $results[] = $obj;
+    //         }
+    
+    //         return $results;
+    //     }else{
+    //         return false;
+    //     }
+        
+    // }
+
     public function find($params = []){
         $results = [];
-        $resultQuery = $this->_db->find($this->_table,$params);
-        foreach($resultQuery as $result){
+        $resultsQuery = $this->_db->find($this->_table,$params);
+        foreach($resultsQuery as $result){
             $obj = new $this->_modelName($this->_table);
-            $this->populateObjData($result);
+            $obj->populateObjData($result);
             $results[] = $obj;
         }
-
         return $results;
     }
-
+    
     public function findFirst($params = []){
         $resultQuery = $this->_db->findFirst($this->_table,$params);
         $result = new $this->_modelName($this->_table);
