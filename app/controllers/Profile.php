@@ -8,15 +8,15 @@ class Profile extends Controller{
 
     public function userAction($params =''){
         //creating user object for the current profile
-        $user = new Users($params);
+        $searchedUser = new Users($params);
         
-        if ($user->id != '') {
+        if ($searchedUser->id != '') {
             
             //assigning the $user to view so that we can use it
-            $this->view->user = $user;
+            $this->view->user = $searchedUser;
 
             //userid of the user we are trying to follow
-            $userid = $user->id;
+            $searchedUserId = $searchedUser->id;
 
             //userid for the current logged in user
             $followerid = currentUser()->id;
@@ -25,22 +25,23 @@ class Profile extends Controller{
             $db = DB::getInstance();
 
             //checking if follower is already following the user
-            $checkForFollowing = $db->find('followers',[
+            //this will return false if no row found otherwise it will return array with data
+            $isFollowing = $followerData = $db->find('followers',[
                 'conditions' => ['user_id = ?','follower_id = ?'],
-                'bind' => [$userid,$followerid]
+                'bind' => [$searchedUserId,$followerid]
             ]);
-            
-            $isFollowing = false;
 
-            if ($checkForFollowing) {
+            //empty($isFollowing) is true when $isFollowing is false
+            //empty($isFollowing) is false when $isFollowing is true i.e. $isfollowing contains array from above query
+            if (!empty($isFollowing)) {
                 $isFollowing = true;
             }
             if ($_POST) {
                 
                 if (isset($_POST['follow'])) {
-                    if (!$checkForFollowing) {
+                    if (empty($isFollowing)) {
                         $db->insert('followers',[
-                            'user_id' => $userid,
+                            'user_id' => $searchedUserId,
                             'follower_id' => $followerid
                         ]);
                         $isFollowing = true;
@@ -48,8 +49,8 @@ class Profile extends Controller{
                 }
 
                 if (isset($_POST['unfollow'])) {
-                    if ($checkForFollowing) {
-                        $db->delete('followers',$checkForFollowing[0]->id);
+                    if (!empty($isFollowing)) {
+                        $db->delete('followers',$followerData[0]->id);
                         $isFollowing = false;
                     } 
                 }
