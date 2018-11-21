@@ -3,6 +3,7 @@
 class Profile extends Controller{
     public function __construct($controller, $action){
         parent::__construct($controller,$action);
+        $this->load_model('Followers');
         $this->view->setLayout('default');
     }
 
@@ -19,7 +20,7 @@ class Profile extends Controller{
             $searchedUserId = $searchedUser->id;
 
             //userid for the current logged in user
-            $followerid = currentUser()->id;
+            $followerId = currentUser()->id;
 
             //creating a object of followermodel
             $db = DB::getInstance();
@@ -28,7 +29,7 @@ class Profile extends Controller{
             //this will return false if no row found otherwise it will return array with data
             $isFollowing = $followerData = $db->find('followers',[
                 'conditions' => ['user_id = ?','follower_id = ?'],
-                'bind' => [$searchedUserId,$followerid]
+                'bind' => [$searchedUserId,$followerId]
             ]);
 
             //empty($isFollowing) is true when $isFollowing is false
@@ -36,21 +37,22 @@ class Profile extends Controller{
             if (!empty($isFollowing)) {
                 $isFollowing = true;
             }
+
             if ($_POST) {
                 
                 if (isset($_POST['follow'])) {
+
+                    //checking if following is not following the searcheduser and if empty we will insert the follow
                     if (empty($isFollowing)) {
-                        $db->insert('followers',[
-                            'user_id' => $searchedUserId,
-                            'follower_id' => $followerid
-                        ]);
+                        $this->FollowersModel->follow($searchedUserId,$followerId);
                         $isFollowing = true;
                     }                
                 }
 
                 if (isset($_POST['unfollow'])) {
+                    //checking if $isfollowing is not empty then we will delete the row
                     if (!empty($isFollowing)) {
-                        $db->delete('followers',$followerData[0]->id);
+                        $this->FollowersModel->unfollow($followerData[0]->id);
                         $isFollowing = false;
                     } 
                 }
