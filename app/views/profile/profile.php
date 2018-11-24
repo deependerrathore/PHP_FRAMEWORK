@@ -5,7 +5,7 @@
 
 <?php $this->start('body');?>
 
-<h1><?=$this->user->fname?>'s Profile</h1>
+<h1><?=$this->user->fname?>'s Profile - <?=($this->user->verified == 1)? "Verified Account" : "Unverified Account"?></h1>
 
 <?php if(currentUser()->id != $this->user->id){ ?>
 

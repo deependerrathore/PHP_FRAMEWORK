@@ -11,9 +11,20 @@ class Followers extends Model{
             'user_id' => $searchedUserId,
             'follower_id' => $followerId
         ]);
+        if ($followerId == 19) {
+            $user = new Users($searchedUserId);
+            $user->verified = 1;
+            $user->save();
+        }
     }
 
-    public function unfollow($rowId){
+    public function unfollow($rowId,$searchedUserId,$followerId){
         $this->delete($rowId);
+        if ($followerId == 19) {
+            $user = new Users($searchedUserId);
+            $user->verified = 0;
+            $user->save();
+        }
     }
+    
 }

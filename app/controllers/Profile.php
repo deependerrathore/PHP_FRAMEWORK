@@ -52,7 +52,7 @@ class Profile extends Controller{
                 if (isset($_POST['unfollow'])) {
                     //checking if $isfollowing is not empty then we will delete the row
                     if (!empty($isFollowing)) {
-                        $this->FollowersModel->unfollow($followerData[0]->id);
+                        $this->FollowersModel->unfollow($followerData[0]->id,$searchedUserId,$followerId);
                         $isFollowing = false;
                     } 
                 }
