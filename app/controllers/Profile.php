@@ -5,6 +5,7 @@ class Profile extends Controller{
         parent::__construct($controller,$action);
         $this->load_model('Followers');
         $this->load_model('Posts');
+        $this->load_model('PostLikes');
         $this->view->setLayout('default');
     }
 
@@ -97,5 +98,23 @@ class Profile extends Controller{
 
 
 
+    }
+
+    public function likeAction($params = ''){
+        if (count($params) == 2) {
+            $userId = $params[0];
+            $postId = $params[1];
+            $postLikes = new PostLikes();
+
+            //Insert like will insert the likes 
+            $userId = $postLikes->insertLike($userId,$postId);
+    
+            $user = new Users((int)$userId);
+            //redirecting to perticular user posts whose posts we have liked
+            Router::redirect("profile/user/{$user->username}");
+        }else{
+            dnd("Invalid request");
+            die();
+        }
     }
 }

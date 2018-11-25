@@ -26,4 +26,11 @@ class Posts extends Model{
             'order' => 'posted_at'
         ]);
     }
+
+    public function getPost($postId){
+        return $this->findFirst([
+            'conditions' =>'id = ?',
+            'bind' => [$postId]
+        ]);
+    }
 }

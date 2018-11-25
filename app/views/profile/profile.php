@@ -19,19 +19,27 @@
 </form>
 <?php }?>
 
+<?php if(currentUser()->id == $this->user->id){ ?>
 <form action="<?=PROJECT_ROOT?>profile/user/<?=$this->user->username?>/posts" method="POST">
     <div class="bg-danger"><?=$this->displayErrors?></div>
-    <textarea name="postbody" rows="8" cols="80"></textarea>
+    <textarea name="postbody" rows="5" cols="80"></textarea>
     <input type="submit" value="Post" name="post"/>
-</form>
 
+</form>
+<?php } ?>
 <div class="posts">
-   <?php 
-   if ($this->posts) {
-    foreach($this->posts as $post){ 
-        echo $post->postbody . '<hr><br>';
-     }
-   }
-    ?>
+   <?php
+    if ($this->posts) {
+        $postString = "";
+        foreach($this->posts as $post){ 
+            $postString = $post->postbody . '<br>';
+            $postString .= "<form action=".PROJECT_ROOT."profile/like/".currentUser()->id."/".$post->id ." method=\"POST\">";
+            $postString .=  "<input type=\"submit\" name=\"like\" value=\"Like\">";
+            $postString .= "<hr>";
+            $postString .= "</form>";
+            echo $postString;
+        }
+    }
+   ?>
 </div>
 <?php $this->end();?>
