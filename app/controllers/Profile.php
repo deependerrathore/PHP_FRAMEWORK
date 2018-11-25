@@ -106,9 +106,14 @@ class Profile extends Controller{
             $postId = $params[1];
             $postLikes = new PostLikes();
 
-            //Insert like will insert the likes 
-            $userId = $postLikes->insertLike($userId,$postId);
-    
+            if ($_POST['like']) {
+                //Insert like will insert the likes 
+                $userId = $postLikes->insertLike($userId,$postId);
+            }
+            if ($_POST['unlike']) {
+                //Delete will dislike the likes 
+                $userId = $postLikes->deleteLike($userId,$postId);
+            }
             $user = new Users((int)$userId);
             //redirecting to perticular user posts whose posts we have liked
             Router::redirect("profile/user/{$user->username}");

@@ -30,11 +30,17 @@
 <div class="posts">
    <?php
     if ($this->posts) {
+        $db = DB::getInstance();
         $postString = "";
         foreach($this->posts as $post){ 
             $postString = $post->postbody . '<br>';
             $postString .= "<form action=".PROJECT_ROOT."profile/like/".currentUser()->id."/".$post->id ." method=\"POST\">";
-            $postString .=  "<input type=\"submit\" name=\"like\" value=\"Like\">";
+            if ($db->query("SELECT id FROM post_likes WHERE user_id = ? AND post_id = ? " , [currentUser()->id,$post->id])->count()) {
+                $postString .=  "<input type=\"submit\" name=\"unlike\" value=\"Unlike\">";
+            }else{
+                $postString .=  "<input type=\"submit\" name=\"like\" value=\"Like\">";
+            }
+            $postString .= '<span> ' . $post->likes . ' likes</span>';
             $postString .= "<hr>";
             $postString .= "</form>";
             echo $postString;
