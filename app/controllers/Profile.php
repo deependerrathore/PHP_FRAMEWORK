@@ -4,12 +4,18 @@ class Profile extends Controller{
     public function __construct($controller, $action){
         parent::__construct($controller,$action);
         $this->load_model('Followers');
+        $this->load_model('Posts');
         $this->view->setLayout('default');
     }
 
     public function userAction($params =''){
+
+        $validation = new Validate();
+    
+        $post = new Posts();
+
         //creating user object for the current profile
-        $searchedUser = new Users($params);
+        $searchedUser = new Users($params[0]);
         
         if ($searchedUser->id != '') {
             
@@ -56,10 +62,31 @@ class Profile extends Controller{
                         $isFollowing = false;
                     } 
                 }
+
+                if (isset($_POST['post'])) {
+
+                    $validation->check($_POST,[
+                        'postbody' =>[
+                            'display' => 'Post',
+                            'required' => true,
+                            'max'=>280
+                        ]
+                    ]);
+
+                    if ($validation->passed()) {
+                        $post->insertPost($_POST,currentUser());
+                    }
+                }
                 
                 
             }
             $this->view->isFollowing = $isFollowing;
+            if ($post->getAllPost($searchedUserId)) {
+                $this->view->posts = $post->getAllPost($searchedUserId);
+            }else{
+                $this->view->posts = false;
+            }
+            $this->view->displayErrors = $validation->displayErrors();
             $this->view->render('profile/profile');
 
         }else{
@@ -67,6 +94,8 @@ class Profile extends Controller{
             $this->view->render('profile/profileerror');
             die();
         }
+
+
 
     }
 }

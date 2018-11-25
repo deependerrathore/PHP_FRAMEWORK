@@ -6,7 +6,7 @@ class Tools extends Controller{
         $this->view->setLayout('default');
     }
 
-    public function indexAction(){
+    public function indexAction($params = []){
         $this->view->render('tools/index');
     }
 

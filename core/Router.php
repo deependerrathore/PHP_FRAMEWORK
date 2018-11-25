@@ -24,7 +24,6 @@ class Router{
         //Params
         $queryParams = $url;
 
-
         //Checking the the controller existing or not
         if (class_exists($controller)) {
             $dispatch = new $controller($controller_name,$action_name);
@@ -32,9 +31,7 @@ class Router{
             die("CLASS {$controller} does not exists");
         }
         if(method_exists($controller,$action)){
-            
-            call_user_func_array([$dispatch,$action],$queryParams); //$dispatch->$action($queryParams)
-           
+            call_user_func_array([$dispatch,$action],array($queryParams)); //$dispatch->$action($queryParams)
         }else{
             echo "{$action} doesnot exist in the {$controller} controller"; 
         }

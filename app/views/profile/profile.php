@@ -19,4 +19,19 @@
 </form>
 <?php }?>
 
+<form action="<?=PROJECT_ROOT?>profile/user/<?=$this->user->username?>/posts" method="POST">
+    <div class="bg-danger"><?=$this->displayErrors?></div>
+    <textarea name="postbody" rows="8" cols="80"></textarea>
+    <input type="submit" value="Post" name="post"/>
+</form>
+
+<div class="posts">
+   <?php 
+   if ($this->posts) {
+    foreach($this->posts as $post){ 
+        echo $post->postbody . '<hr><br>';
+     }
+   }
+    ?>
+</div>
 <?php $this->end();?>
