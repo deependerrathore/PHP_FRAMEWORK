@@ -6,6 +6,20 @@ class Home extends Controller{
         parent::__construct($controller,$action);
     }
     public function indexAction(){
+        $showTimeline = false;
+        $followingPosts = '';
+        if (currentUser()) {
+            $db = DB::getInstance();
+            $followingPosts = $db->query("SELECT posts.postbody,posts.likes,users.username FROM posts,followers,users
+            WHERE posts.user_id = followers.user_id
+            AND users.id = posts.user_id
+            AND follower_id = ?
+            ORDER BY posts.likes DESC",[currentUser()->id])->results();
+            $showTimeline = true;
+        }
+
+        $this->view->showTimeline = $showTimeline;
+        $this->view->followingPosts = $followingPosts;
         $this->view->render('home/index');
     }
 }
