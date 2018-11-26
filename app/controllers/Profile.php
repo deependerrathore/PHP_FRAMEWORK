@@ -101,9 +101,10 @@ class Profile extends Controller{
     }
 
     public function likeAction($params = ''){
-        if (count($params) == 2) {
-            $userId = $params[0];
-            $postId = $params[1];
+        if (count($params) == 3) {
+            $userId = $params[0]; //userid
+            $postId = $params[1]; //postid
+            $redirectLike = $params[2];//redirect like
             $postLikes = new PostLikes();
 
             if ($_POST['like']) {
@@ -116,7 +117,11 @@ class Profile extends Controller{
             }
             $user = new Users((int)$userId);
             //redirecting to perticular user posts whose posts we have liked
-            Router::redirect("profile/user/{$user->username}");
+            if ($redirectLike == 'home') {
+                Router::redirect("");
+            }else if ($redirectLike == 'profile') {
+                Router::redirect("profile/user/{$user->username}");
+            }
         }else{
             dnd("Invalid request");
             die();
