@@ -123,8 +123,7 @@ class Profile extends Controller{
                 Router::redirect("profile/user/{$user->username}");
             }
         }else{
-            dnd("Invalid request");
-            die();
+            dnd("Invalid Number of argument");
         }
     }
 }
