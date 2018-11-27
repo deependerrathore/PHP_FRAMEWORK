@@ -36,16 +36,35 @@
         $db = DB::getInstance();
         $postString = "";
         foreach($this->posts as $post){ 
-            $postString = $post->postbody . '<br>';
+            $postString = $post->postbody;
+
+            $postString .= "<br>";
+            $postString .= "<br>";
+
+            if ($post->postimg != null) {
+                $postString .= "<img src=" .$post->postimg . "/>";
+
+            }
+
+            $postString .= "<br>";
+            $postString .= "<br>";
+
+            //form for like dislike button
             $postString .= "<form action=".PROJECT_ROOT."profile/like/".currentUser()->id."/".$post->id ."/profile"." method=\"POST\">";
+
+            //like and unlike
             if ($db->query("SELECT id FROM post_likes WHERE user_id = ? AND post_id = ? " , [currentUser()->id,$post->id])->count()) {
                 $postString .=  "<input type=\"submit\" name=\"unlike\" value=\"Unlike\">";
             }else{
                 $postString .=  "<input type=\"submit\" name=\"like\" value=\"Like\">";
             }
+            //likes count
             $postString .= '<span> ' . $post->likes . ' likes</span>';
             $postString .= "<hr>";
+
+            //form end
             $postString .= "</form>";
+
             echo $postString;
         }
     }
