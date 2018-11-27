@@ -165,4 +165,22 @@ class Profile extends Controller{
             dnd("Invalid number of arugument");
         }
     }
+    public function profileImageAction(){
+
+        if (isset($_POST['uploadprofileimg'])) {
+            $image = base64_encode(file_get_contents($_FILES['profileimg']['tmp_name']));
+            $options = array('http'=>array(
+                'method' =>"POST",
+                'header' => "Authorization: Bearer f9bae1a2c4683f2b7fe53b0c00bbc72f3a92ba7b\n".
+                "content-type: application/x-www-form-urlencoded",
+                'content' => $image
+
+            ));
+            $context = stream_context_create($options);
+            $imageURL = "https://api.imgur.com/3/image";
+            $response = file_get_contents($imageURL ,false,$context);
+        }
+        $this->view->render('profile/profileimage');
+
+    }
 }
