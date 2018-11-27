@@ -20,12 +20,15 @@
 <?php }?>
 
 <?php if(currentUser()->id == $this->user->id){ ?>
-<form action="<?=PROJECT_ROOT?>profile/user/<?=$this->user->username?>/posts" method="POST">
+<form action="<?=PROJECT_ROOT?>profile/user/<?=$this->user->username?>" method="POST" enctype="multipart/form-data">
     <div class="bg-danger"><?=$this->displayErrors?></div>
-    <textarea name="postbody" rows="5" cols="80"></textarea>
+    <textarea name="postbody" rows="5" cols="80"></textarea><br>
+    Upload a post image:
+    <input type="file" name="postimg"/>
     <input type="submit" value="Post" name="post"/>
 
 </form>
+<br>
 <?php } ?>
 <div class="posts">
    <?php

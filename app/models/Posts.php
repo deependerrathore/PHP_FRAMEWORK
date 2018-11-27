@@ -10,20 +10,22 @@ class Posts extends Model{
         parent::__construct($table);
     }
 
-    public function insertPost($params,$currentUser){
+    public function insertPost($params,$file,$currentUser){
         $this->assign($params);
         $this->posted_at = $date = date('Y-m-d H:i:s');
         $this->user_id = $currentUser->id;
         $this->likes = 0;
+        if (!empty($file)) {
+            $this->postimg = Image::uploadImage($file,'postimg');
+        }
         $this->save();
-        Router::redirect("profile/user/{$currentUser->username}/posts");
     }
 
     public function getAllPost($userid){
         return $this->find([
             'conditions' => 'user_id = ?',
             'bind' => [$userid],
-            'order' => 'posted_at'
+            'order' => 'posted_at DESC'
         ]);
     }
 

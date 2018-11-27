@@ -66,7 +66,6 @@ class Profile extends Controller{
                 }
 
                 if (isset($_POST['post'])) {
-
                     $validation->check($_POST,[
                         'postbody' =>[
                             'display' => 'Post',
@@ -74,9 +73,13 @@ class Profile extends Controller{
                             'max'=>280
                         ]
                     ]);
+                            
 
                     if ($validation->passed()) {
-                        $post->insertPost($_POST,currentUser());
+                        $post->insertPost($_POST,$_FILES,currentUser());
+                        $username = currentUser()->username;
+                        //Router::redirect("profile/user/{$username}");
+
                     }
                 }
                 

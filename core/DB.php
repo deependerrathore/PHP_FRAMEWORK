@@ -2,7 +2,7 @@
 
 class DB{
     private static $_instance = null;
-    private $_pdo ,$_query,$_error = false, $_result,$_count = 0 , $_lastInserID = null;
+    private $_pdo ,$_query,$_error = false, $_result,$_count = 0 , $_lastInsertID = null;
 
     public function __construct()
     {
@@ -50,7 +50,7 @@ class DB{
         if ($this->_query->execute()) {
             $this->_result = $this->_query->fetchAll(PDO::FETCH_OBJ);
             $this->_count = $this->_query->rowCount();
-            $this->_lastInserID = $this->_pdo->lastInsertId();
+            $this->_lastInsertID = $this->_pdo->lastInsertId();
         }else{
             $this->_error = true;
         }
@@ -216,7 +216,7 @@ class DB{
 
     //This will return last insert id
     public function lastID(){
-        return $this->_lastInserID;
+        return $this->_lastInsertID;
     }
 
     public function error(){
