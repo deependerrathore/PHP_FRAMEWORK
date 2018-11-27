@@ -6,6 +6,7 @@ class Profile extends Controller{
         $this->load_model('Followers');
         $this->load_model('Posts');
         $this->load_model('PostLikes');
+        $this->load_model('Users');
         $this->view->setLayout('default');
     }
 
@@ -179,6 +180,14 @@ class Profile extends Controller{
             $context = stream_context_create($options);
             $imageURL = "https://api.imgur.com/3/image";
             $response = file_get_contents($imageURL ,false,$context);
+
+            $response = json_decode($response);
+
+            $link = $response->data->link;
+
+            $this->UsersModel->update(currentUser()->id,['profileimg' => $link]);
+
+
         }
         $this->view->render('profile/profileimage');
 
