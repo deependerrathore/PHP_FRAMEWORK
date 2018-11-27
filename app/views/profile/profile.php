@@ -36,7 +36,7 @@
         $db = DB::getInstance();
         $postString = "";
         foreach($this->posts as $post){ 
-            $postString = $post->postbody;
+            $postString = Posts::add_link($post->postbody);//adding link for @
 
             $postString .= "<br>";
             $postString .= "<br>";
