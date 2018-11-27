@@ -12,6 +12,13 @@ if ($this->showTimeline == true) {
     //dnd($this->followingPosts);
     foreach($this->followingPosts as $post){
         $postString = '<p>' .$post->postbody . '  ~ '. $post->username. '</p>';
+
+        if ($post->postimg != null) {
+            $postString .= "<img src=" .$post->postimg . "/>";
+            $postString .= "<br>";
+            $postString .= "<br>";
+        }
+        
         $postString .= "<form action=".PROJECT_ROOT."profile/like/".currentUser()->id."/".$post->id."/home"."  method=\"POST\">";
         if ($db->query("SELECT id FROM post_likes WHERE user_id = ? AND post_id = ? " , [currentUser()->id,$post->id])->count()) {
             $postString .=  "<input type=\"submit\" name=\"unlike\" value=\"Unlike\">";

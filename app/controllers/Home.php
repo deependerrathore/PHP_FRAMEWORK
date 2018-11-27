@@ -10,7 +10,7 @@ class Home extends Controller{
         $followingPosts = '';
         if (currentUser()) {
             $db = DB::getInstance();
-            $followingPosts = $db->query("SELECT posts.id,posts.postbody,posts.likes,users.username FROM posts,followers,users
+            $followingPosts = $db->query("SELECT posts.id,posts.postbody,posts.likes,users.username,posts.postimg FROM posts,followers,users
             WHERE posts.user_id = followers.user_id
             AND users.id = posts.user_id
             AND follower_id = ?

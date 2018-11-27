@@ -43,11 +43,10 @@
 
             if ($post->postimg != null) {
                 $postString .= "<img src=" .$post->postimg . "/>";
+                $postString .= "<br>";
+                $postString .= "<br>";
 
             }
-
-            $postString .= "<br>";
-            $postString .= "<br>";
 
             //form for like dislike button
             $postString .= "<form action=".PROJECT_ROOT."profile/like/".currentUser()->id."/".$post->id ."/profile"." method=\"POST\">";
