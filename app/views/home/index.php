@@ -7,6 +7,7 @@
 <?php 
 if ($this->showTimeline == true) {
     $db = DB::getInstance();
+    $commentsObj = new Comments();
     echo '<h1 class="text-center blue">Welcome to your timeline</h1>';
     //dnd($this->followingPosts);
     foreach($this->followingPosts as $post){
@@ -22,11 +23,19 @@ if ($this->showTimeline == true) {
         $postString .= "<br>";
 
         //this is the comment section 
-        $postString .= "<form action=".PROJECT_ROOT."home/comment/".currentUser()->id."/".$post->id."/home". " method=\"POST\">";
+        $postString .= "<form action=".PROJECT_ROOT."profile/comment/".currentUser()->id."/".$post->id."/home". " method=\"POST\">";
         $postString .= "<div class=\"bg-danger\">" . $this->displayErrors . "</div>";
         $postString .= "<textarea name=\"commentbody\" rows=\"3\" cols=\"80\"></textarea>";
         $postString .=  "<input type=\"submit\" value=\"Comment\" name=\"comment\"/>";
         $postString .=  "</form>";
+        
+        $comments = $commentsObj->getComments($post->id)->results();
+        if (!empty($comments)) {
+            foreach($comments as $comment){
+                $postString .= $comment->commentbody. ' ~ ' . $comment->username ; 
+                $postString .= "<br>";
+            }
+        }
         $postString .= "<hr>";
 
         echo $postString;

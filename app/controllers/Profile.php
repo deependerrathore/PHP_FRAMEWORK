@@ -126,4 +126,43 @@ class Profile extends Controller{
             dnd("Invalid Number of argument");
         }
     }
+
+    public function commentAction($params = ''){
+        $validation = new Validate();
+        $comment = new Comments();
+        if (count($params) == 3) {
+
+            $userId = $params[0]; //userid
+            $postId = $params[1]; //postid
+            $redirectLike = $params[2];//redirect like
+
+
+            if (isset($_POST['comment'])) {
+                
+                $validation->check($_POST,[
+                    'commentbody' =>[
+                        'display' => 'Comment',
+                        'required' => true,
+                        'max'=>280
+                    ]
+                ]);
+    
+                if ($validation->passed()) {
+                    $comment->insertComment($_POST,$userId,$postId);     
+                }else{
+                    dnd("Comment body cannot be empty");//this needs to be fixed                
+                }
+                
+                if ($redirectLike == 'home') {
+                    Router::redirect("");
+                }else if ($redirectLike == 'profile') {
+                    Router::redirect("profile/user/{$user->username}");
+                }
+                
+    
+            }
+        }else{
+            dnd("Invalid number of arugument");
+        }
+    }
 }
