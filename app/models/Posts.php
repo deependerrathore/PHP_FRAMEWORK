@@ -79,4 +79,8 @@ class Posts extends Model{
         }
 
     }
+
+    public function deletePost($postId){
+        $this->delete($postId);
+    }
 }

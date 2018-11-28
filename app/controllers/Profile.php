@@ -181,4 +181,22 @@ class Profile extends Controller{
         $this->view->render('profile/profileimage');
 
     }
+
+    public function deleteAction($params = ''){
+        
+        if (count($params) == 3) {
+            $userId = $params[0]; //userid
+            $postId = $params[1]; //postid
+            $redirectLike = $params[2];//redirect like
+            $user = new Users((int)$userId);
+
+            $this->PostsModel->deletePost($postId);
+            $this->PostLikesModel->deleteLikeWhenPostDeleted($postId);
+
+        }
+        if ($redirectLike == 'home') {
+            Router::redirect("");
+        }else if ($redirectLike == 'profile') {
+            Router::redirect("profile/user/{$user->username}");
+        }    }
 }

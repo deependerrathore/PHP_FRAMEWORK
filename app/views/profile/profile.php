@@ -59,10 +59,17 @@
             }
             //likes count
             $postString .= '<span> ' . $post->likes . ' likes</span>';
-            $postString .= "<hr>";
 
             //form end
             $postString .= "</form>";
+
+            if(currentUser()->id == $this->user->id){
+                $postString .= "<form action=".PROJECT_ROOT."profile/delete/".currentUser()->id."/".$post->id ."/profile"." method=\"POST\">";
+                $postString .=  "<input type=\"submit\" name=\"deletepost\" value=\"X\">";
+                $postString .= "</form>";
+            }
+
+            $postString .= "<hr>";
 
             echo $postString;
         }

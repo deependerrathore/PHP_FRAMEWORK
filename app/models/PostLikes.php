@@ -56,4 +56,11 @@ class PostLikes extends Model{
         return $postUser;
 
     }
+
+    //this function will get used when we are deleting the actual post
+    public function deleteLikeWhenPostDeleted($postId){
+        $this->query("DELETE FROM `post_likes` WHERE post_id = ?" , [$postId]);
+    }
+
+
 }
