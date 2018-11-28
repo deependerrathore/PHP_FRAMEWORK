@@ -11,7 +11,7 @@ if ($this->showTimeline == true) {
     echo '<h1 class="text-center blue">Welcome to your timeline</h1>';
     //dnd($this->followingPosts);
     foreach($this->followingPosts as $post){
-        $postString = '<p>' .$post->postbody . '  ~ '. $post->username. '</p>';
+        $postString = '<p>' .Posts::add_link($post->postbody) . '  ~ '. $post->username. '</p>';
 
         if ($post->postimg != null) {
             $postString .= "<img src=" .$post->postimg . "/>";

@@ -51,6 +51,6 @@ class Posts extends Model{
                 $newString .= $word . " ";
             }
         }
-        return Input::sanatize($newString);
+        return $newString;
     }
 }
