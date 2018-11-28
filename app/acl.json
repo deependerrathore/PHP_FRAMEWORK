@@ -11,6 +11,7 @@
         },
         "Register":["logout","changepassword"],
         "Tools" : ["*"],
-        "Profile":["*"]
+        "Profile":["*"],
+        "Topic" :["index"] 
     }
 }

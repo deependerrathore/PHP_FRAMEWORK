@@ -11,10 +11,12 @@ class Posts extends Model{
     }
 
     public function insertPost($params,$file,$currentUser){
+        
         $this->assign($params);
         $this->posted_at = $date = date('Y-m-d H:i:s');
         $this->user_id = $currentUser->id;
         $this->likes = 0;
+        $this->topics = $this->getTopics($params['postbody']);
         if ($file['postimg']['error'] == 0) {
             $this->postimg = Image::uploadImage($file,'postimg');
         }
@@ -36,8 +38,8 @@ class Posts extends Model{
         ]);
     }
 
-    public static function add_link($text){
-        $text  = explode(" ",$text);
+    public static function add_link($postbody){
+        $text  = explode(" ",$postbody);
         $newString = "";
         foreach($text as $word){
             if(substr($word,0,1) == '@'){
@@ -47,10 +49,34 @@ class Posts extends Model{
                 }else{
                     $newString .= $word . " "; 
                 }
+            }elseif(substr($word,0,1) == '#'){
+                $newString .= "<a href=".PROJECT_ROOT. "topic/?topic=". ltrim($word,'#') . ">" . $word . "</a>" . " ";
             }else{
                 $newString .= $word . " ";
             }
         }
         return $newString;
+    }
+
+    public static function getTopics($postbody){
+        $text  = explode(" ",$postbody);
+        $topics = "";
+        foreach($text as $word){
+            if(substr($word,0,1) == '#'){
+                $topics .= ltrim($word,'#') . ",";
+            }
+        }
+        return rtrim($topics,',');
+    }
+
+    public function getPostsWithSpecificTopics($topic){
+        $db = DB::getInstance();
+        $posts = $db->query("SELECT topics FROM posts WHERE FIND_IN_SET(?,topics)",[$topic]);
+        if ($posts->results()) {
+            return $db->query("SELECT * FROM posts WHERE FIND_IN_SET(?,topics)",[$topic])->results();
+        }else{
+            dnd("no topic found");
+        }
+
     }
 }
