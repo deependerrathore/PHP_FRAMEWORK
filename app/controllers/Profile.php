@@ -112,8 +112,13 @@ class Profile extends Controller{
             $postLikes = new PostLikes();
 
             if ($_POST['like']) {
+
                 //Insert like will insert the likes 
                 $userId = $postLikes->insertLike($userId,$postId);
+
+                //sending notification
+                $this->PostsModel->notify("",$postId);
+                
             }
             if ($_POST['unlike']) {
                 //Delete will dislike the likes 

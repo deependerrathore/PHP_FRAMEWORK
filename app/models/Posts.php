@@ -5,9 +5,26 @@
  */
 
 class Posts extends Model{
-    public function __construct(){
+    public function __construct($postId = ''){
         $table = 'posts';
         parent::__construct($table);
+
+        if($postId != ''){
+            $postId = (int)$postId;
+            if(is_int($postId)){
+                $p = $this->_db->findFirst('posts',[
+                    'conditions' => ['id = ?'],
+                    'bind' => [$postId]
+                ]);
+            }
+            if($p){
+                foreach($p as $key => $value){
+                    $this->$key = $value;
+                }
+            }
+
+        }
+
     }
 
     public function insertPost($params,$file,$currentUser){
@@ -65,7 +82,7 @@ class Posts extends Model{
         return $newString;
     }
 
-    public static function notify($postbody){
+    public static function notify($postbody = '', $postId = 0){
         $text  = explode(" ",$postbody);
         $notify = array();
         foreach($text as $word){
@@ -75,6 +92,11 @@ class Posts extends Model{
                     $notify[ltrim($word,'@')]  = array("type"=>1,"extra"=> '{"postbody": "' .sanatize($postbody).'"}');
                 }
             }
+        }
+        if (strlen($postbody) == 0 && $postId != 0) {
+            $post = new Posts($postId);
+            $notification = new Notifications();
+            $notification->insertNotification($post->user_id,array("type"=>2));
         }
         return $notify;
     }
