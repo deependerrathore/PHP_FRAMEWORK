@@ -20,6 +20,13 @@ class Posts extends Model{
         if ($file['postimg']['error'] == 0) {
             $this->postimg = Image::uploadImage($file,'postimg');
         }
+
+        if (count(self::notify($params['postbody'])) != 0) {
+            foreach(self::notify($params['postbody']) as $receiverUsername => $notificationType){
+                $notification = new Notifications();
+                $notification->insertNotification($receiverUsername,$notificationType);
+            }
+        }
         $this->save();
     }
 
@@ -58,6 +65,19 @@ class Posts extends Model{
         return $newString;
     }
 
+    public static function notify($postbody){
+        $text  = explode(" ",$postbody);
+        $notify = array();
+        foreach($text as $word){
+            if(substr($word,0,1) == '@'){
+                $user = new Users(ltrim($word,'@'));
+                if ($user->id) {
+                    $notify[ltrim($word,'@')]  = 1;
+                }
+            }
+        }
+        return $notify;
+    }
     public static function getTopics($postbody){
         $text  = explode(" ",$postbody);
         $topics = "";
