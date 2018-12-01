@@ -22,9 +22,9 @@ class Posts extends Model{
         }
 
         if (count(self::notify($params['postbody'])) != 0) {
-            foreach(self::notify($params['postbody']) as $receiverUsername => $notificationType){
+            foreach(self::notify($params['postbody']) as $receiverUsername => $notificationArray){
                 $notification = new Notifications();
-                $notification->insertNotification($receiverUsername,$notificationType);
+                $notification->insertNotification($receiverUsername,$notificationArray);
             }
         }
         $this->save();
@@ -72,7 +72,7 @@ class Posts extends Model{
             if(substr($word,0,1) == '@'){
                 $user = new Users(ltrim($word,'@'));
                 if ($user->id) {
-                    $notify[ltrim($word,'@')]  = 1;
+                    $notify[ltrim($word,'@')]  = array("type"=>1,"extra"=> '{"postbody": "' .sanatize($postbody).'"}');
                 }
             }
         }

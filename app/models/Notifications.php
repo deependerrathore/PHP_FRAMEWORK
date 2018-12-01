@@ -6,11 +6,12 @@ class Notifications extends Model{
         parent::__construct($table);
     }
 
-    public function insertNotification($username,$notificationType){
+    public function insertNotification($username,$notificationArray){
         $receiver = new Users($username);
-        $this->type = $notificationType;
+        $this->type = $notificationArray['type'];
         $this->sender = currentUser()->id;
         $this->receiver = $receiver->id;
+        $this->extra = $notificationArray['extra'];
         $this->save();
     }
 }
