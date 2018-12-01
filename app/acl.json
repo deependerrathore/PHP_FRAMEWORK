@@ -12,7 +12,7 @@
         "Register":["logout","changepassword"],
         "Tools" : ["*"],
         "Profile":["*"],
-        "Topic" :["index"],
-        "Notification":["index"]
+        "Topic" :["*"],
+        "Notification":["*"]
     }
 }

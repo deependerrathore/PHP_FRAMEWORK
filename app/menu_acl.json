@@ -1,17 +1,12 @@
 {
     "Home":"home",
-    "Tools":{
+    "Notification" : "notification",
+    "Settings":{
         "my Tools":"tools",
-        "Tool 1": "tools/first",
+        "Change Password": "register/changepassword",
         "Tool 2": "tools/second",
         "separator":"",
         "Tool 3": "tools/third"
-    },
-    "Google":"https://www.google.com",
-    "PHP Docs" : "https://php.net/manual/en",
-    "Login" : "register/login",
-    "Logout" : {
-        "Logout":"register/logout",
-        "Logout from all devices" : "register/logout/all"
     }
+
 }

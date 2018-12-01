@@ -9,7 +9,6 @@ class Register extends Controller{
     public function __construct($controller, $action){
         parent::__construct($controller,$action);
         $this->load_model('Users'); //load the Users model
-        $this->view->setLayout('default');
     }
     
     public function logoutAction($params = ''){
