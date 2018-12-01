@@ -4,7 +4,7 @@
 
 <?php $this->start('body');?>
 
-<div class="container">
+<!-- <div class="container">
     <div class="row">
         <div class="col-md-6 offset-md-3 well">
                 <h3 class="text-center">Login To Your Account</h3>
@@ -32,5 +32,74 @@
                 </form>
         </div>
     </div>    
-</div>
+</div> -->
+
+<section class="section">
+        <div class="container">
+            <div class="columns">
+                <div class="column"></div>
+                <div class="column is-4">
+                    <div>
+                        <form role="form" method="POST" action="<?=PROJECT_ROOT?>register/login">
+                            <p class="subtitle is-4 has-text-centered">
+                               <strong>Sign in to your account</strong>
+                            </p>
+                            <div class="field">
+                                <div class="control">
+                                    <p class="control has-text-centered">
+                                        Don't have an account yet?
+                                        <a href="<?=PROJECT_ROOT?>/register/register">Sign up here</a>
+                                    </p>
+                                </div>
+                            </div>
+                            <!-- <div class="field">
+                                <p class="control">
+                                    <a class="button is-dark is-medium is-fullwidth" href="/auth/github">
+                                        <span class="icon" >
+                                            <i class="fa fa-github"></i>
+                                        </span>
+                                        <span><strong>Log in with Github</strong></span>
+                                    </a>
+                                </p>
+                            </div>
+                            <div class="is-divider" data-content="OR LOG IN WITH"></div> -->
+                            <div class="field">
+                                <p class="control">
+                                    <input class="input  is-medium" type="text"
+                                           name="username" value="" placeholder="Your Username"
+                                           >                                 </p>
+                            </div>
+                        <div class="field">
+                                <p class="control">
+                                    <input class="input  is-medium"
+                                           type="password" name="password" placeholder="Your Password">
+                                                                    </p>
+                            </div>
+
+                            <div class="field">
+                                <div class="control">
+                                    <p class="control">
+                                        <button type="submit" name="singin" class="button is-primary is-fullwidth is-medium">
+                                            <strong>Sign in</strong>
+                                        </button>
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="field">
+                                <div class="control">
+                                    <p class="control has-text-centered">
+                                        <a href="<?=PROJECT_ROOT?>/register/forgotpassword">
+                                            Forgot password?
+                                        </a>
+                                    </p>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <div class="column"></div>
+            </div>
+
+        </div>
+    </section>
 <?php $this->end();?>

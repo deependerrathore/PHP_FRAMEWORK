@@ -1,7 +1,6 @@
 {
     "Guest":{
         "denied" : {},
-        "Home" :["*"],
         "Register": ["login","register","forgotpassword","resetpassword"],
         "Restricted": ["*"]
     },
@@ -13,6 +12,7 @@
         "Tools" : ["*"],
         "Profile":["*"],
         "Topic" :["*"],
-        "Notification":["*"]
+        "Notification":["*"],
+        "Home" :["*"]
     }
 }
