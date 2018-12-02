@@ -25,7 +25,7 @@ class Comments extends Model{
 
     public function getComments($postId){
         $db= DB::getInstance();
-        return $db->query("SELECT comments.id,commentbody,username,posted_at FROM comments,users
+        return $db->query("SELECT comments.id,commentbody,username,fname,lname,posted_at FROM comments,users
         WHERE comments.user_id = users.id
         AND post_id =? " , [$postId]);
     }

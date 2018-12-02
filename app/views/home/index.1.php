@@ -38,7 +38,7 @@
                     <div class="media-content">
                         <div class="content">
                         <p>
-                            <strong><?= $post->username?></strong>
+                            <strong><?= $post->fname. ' ' . $post->lname?></strong> <small><a href="<?=PROJECT_ROOT?>profile/user/<?=$post->username?>">@<?=$post->username?></a></small>
                             <br>
                             <?=Posts::add_link($post->postbody)?>
                             <br>
@@ -71,9 +71,10 @@
                                 <div class="media-content">
                                     <div class="content">
                                     <p>
-                                        <strong><?=$comment->username?></strong>
+                                        <strong><?=$comment->fname . ' ' . $comment->lname?></strong> <small><a href="<?=PROJECT_ROOT?>profile/user/<?=$comment->username?>">@<?=$comment->username?></a></small>
                                         <br>
-                                        <?=$comment->commentbody ?>                                      <br>
+                                        <?=$comment->commentbody ?>                                      
+                                        <br>
                                         <small><a>likes
                                         </a> · <a><?=$post->likes?> likes</a> · 2 hrs</small>
                                     </p>
