@@ -15,7 +15,7 @@
     <section class="hero">
         <div class="hero-body">
             <div class="container">
-            <h1 class="title">Welcome to your profile - <?=currentUser()->fname?></h1>
+            <h1 class="title">Welcome to your Timeline - <?=currentUser()->fname?></h1>
             <h2 class="subtitle">Event Unacademy</h2>
             </div>
         </div>

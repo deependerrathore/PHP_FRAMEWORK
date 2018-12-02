@@ -64,12 +64,14 @@
                             </div>
                             <div class="is-divider" data-content="OR LOG IN WITH"></div> -->
                             <div class="field">
+                                <label class="label">Username</label>
                                 <p class="control">
                                     <input class="input  is-medium" type="text"
                                            name="username" value="" placeholder="Your Username"
                                            >                                 </p>
                             </div>
                         <div class="field">
+                            <label class="label">Password</label>
                                 <p class="control">
                                     <input class="input  is-medium"
                                            type="password" name="password" placeholder="Your Password">
@@ -82,6 +84,13 @@
                                         <button type="submit" name="singin" class="button is-primary is-fullwidth is-medium">
                                             <strong>Sign in</strong>
                                         </button>
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="field">
+                                <div class="control">
+                                    <p class="control">
+                                    <?=$this->displayErrors?> 
                                     </p>
                                 </div>
                             </div>

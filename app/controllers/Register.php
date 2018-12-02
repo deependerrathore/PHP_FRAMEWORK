@@ -78,7 +78,7 @@ class Register extends Controller{
         }
         $this->view->post = $posted_values;
         $this->view->displayErrors = $validation->displayErrors();
-        $this->view->render('register/register');
+        $this->view->render('register/register.1');
     }
 
     

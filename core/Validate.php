@@ -117,13 +117,13 @@ class Validate{
 
     public function displayErrors()
     {
-        $html = '<ul class="alert-danger">';
+        $html = '<ul class="menu-list">';
         foreach ($this->_errors as $error) {
             if (is_array($error)) {
-                $html .= '<li class="text-danger">' . $error[0] . '</li>';
-                $html .= '<script>jQuery("document").ready(function(){jQuery("#' . $error[1] . '").addClass("is-invalid")});</script>';
+                $html .= '<li class="has-text-danger">' . $error[0] . '</li>';
+                $html .= '<script>jQuery("document").ready(function(){jQuery("#' . $error[1] . '").addClass("is-danger")});</script>';
             } else {
-                $html .= '<li class="text-danger">'.$error.'</li>';
+                $html .= '<li class="has-text-danger">'.$error.'</li>';
             }
         }
          $html .= '</ul>';
