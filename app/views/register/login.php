@@ -66,16 +66,22 @@
                             <div class="field">
                                 <label class="label">Username</label>
                                 <p class="control">
-                                    <input class="input  is-medium" type="text"
-                                           name="username" value="" placeholder="Your Username"
-                                           >                                 </p>
+                                    <input class="input  is-medium" type="text" name="username" id="username" value="" placeholder="Your Username">                                 
+                                </p>
                             </div>
-                        <div class="field">
-                            <label class="label">Password</label>
-                                <p class="control">
-                                    <input class="input  is-medium"
-                                           type="password" name="password" placeholder="Your Password">
-                                                                    </p>
+                            <div class="field">
+                                <label class="label">Password</label>
+                                    <p class="control">
+                                        <input class="input  is-medium" type="password" id="password" name="password" placeholder="Your Password">
+                                    </p>
+                            </div>
+                            <div class="field">
+                                <div class="control">
+                                    <label class="checkbox">
+                                    <input type="checkbox" value="on" name="remember_me" id="remember_me">
+                                    Remember me
+                                    </label>
+                                </div>
                             </div>
 
                             <div class="field">
