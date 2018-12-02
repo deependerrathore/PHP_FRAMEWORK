@@ -42,7 +42,7 @@
     <ul class="navbar-nav ml-auto">
             <?php if(currentUser()):?>
                 <li class="nav-item <?=$active?>">
-                    <a class="nav-link" href="#">Hello <?=currentUser()->fname;?></a>
+                    <a class="nav-link" href="<?=PROJECT_ROOT?>profile/user/<?=currentUser()->username?>">Hello <?=currentUser()->fname;?></a>
                 </li>
             <?php endif;?>
     </ul>

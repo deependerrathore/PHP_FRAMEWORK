@@ -54,7 +54,7 @@
         <div class="buttons">
           <?php if(currentUser()):?>
               
-              <a class="navbar-item" href="#">Hello <?=currentUser()->fname;?></a>
+              <a class="navbar-item" href="<?=PROJECT_ROOT?>profile/user/<?=currentUser()->username?>">Hello <?=currentUser()->fname;?></a>
 
               <a class="button is-primary" href="<?=PROJECT_ROOT?>register/logout">
                   <strong>Log Out</strong>

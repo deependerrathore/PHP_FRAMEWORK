@@ -7,7 +7,6 @@ class Profile extends Controller{
         $this->load_model('Posts');
         $this->load_model('PostLikes');
         $this->load_model('Users');
-        $this->view->setLayout('default');
     }
 
     public function userAction($params =''){
@@ -92,7 +91,7 @@ class Profile extends Controller{
                 $this->view->posts = false;
             }
             $this->view->displayErrors = $validation->displayErrors();
-            $this->view->render('profile/profile');
+            $this->view->render('profile/profile.1');
 
         }else{
             $this->view->error = 'User not found';

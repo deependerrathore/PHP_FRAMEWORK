@@ -121,6 +121,8 @@ class Users extends Model{
     }
 
     public function registerNewUser($params){
+        $params['fname'] = ucfirst($params['fname']);
+        $params['lname'] = ucfirst($params['lname']);
         $this->assign($params);
         $this->deleted = 0;
         $this->whenaccountcreated = $date = date('Y-m-d H:i:s');
