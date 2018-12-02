@@ -20,7 +20,7 @@
             </div>
         </div>
     </section>
-
+    <?php if(!empty($this->followingPosts)):?>
     <section class="section">
         <div class="container">
         <div class="columns">
@@ -122,9 +122,12 @@
     
         </div>
     </section>
+    <?php else:?>
+        <?php require_once(ROOT . DS . 'app' . DS . 'views' . DS .'register' . DS . 'newuser.php');?>
+    <?php endif;?>
 
 <?php else:?>
-    echo '<h1 class="text-center blue">Welcome to this MVC framework</h1>';
+    <h1>Welcome to eventunacademy =login or sign up</h1>
 <?php endif;?>
 
 <?php $this->end(); ?>
