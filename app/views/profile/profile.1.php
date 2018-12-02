@@ -32,7 +32,7 @@
 
                         <div class="field">
                             <div class="control">
-                                <textarea class="textarea" name="postbody" placeholder="What's in your mind!!!!"></textarea>
+                                <textarea class="textarea" rows=3 name="postbody" placeholder="What's in your mind!!!!"></textarea>
                             </div>
                         </div>
                     

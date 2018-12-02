@@ -21,7 +21,7 @@ class Home extends Controller{
         $this->view->showTimeline = $showTimeline;
         $this->view->followingPosts = $followingPosts;
         $this->view->displayErrors = '';
-        $this->view->render('home/index');
+        $this->view->render('home/index.1');
     }
 
     
