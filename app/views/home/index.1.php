@@ -118,8 +118,21 @@
                 <?php endforeach;?>
                 
                 </div>
-                <div class="column"></div>
-                <div class="column"></div>
+                <div class="column">
+                    <form action="<?=PROJECT_ROOT?>home/search" method="POST">
+                        <div class="field is-grouped">
+                            <p class="control is-expanded">
+                                <input class="input" type="text" name="searchbox" placeholder="Want to find something...">
+                            </p>
+                            <p class="control">
+                                <input class="button is-primary" type="submit" name="search" value="Search"/>
+                            </p>
+                        </div>
+                        <!-- <input class="input is-rounded" type="search" name="searchbox" id="search" placeholder="Enter username or posts content"/>
+                        <input class="button" type="submit" name="search" value="search"/> -->
+                    </form>
+                </div>
+                <!-- <div class="column"></div> -->
     
         </div>
     </section>
