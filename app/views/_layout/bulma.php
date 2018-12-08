@@ -9,7 +9,6 @@
     <!-- <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous"> -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="<?=PROJECT_ROOT;?>css/custom.css">
-    <script src="<?=PROJECT_ROOT;?>js/jquery-3.3.1.min.js"></script>
     <title><?= $this->getSiteTitle(); ?></title>
     <?=$this->content('head');?>
 </head>
@@ -18,5 +17,10 @@
     <div class="container-fluid" style="min-height:cal(100% - 125px);">
         <?=$this->content('body');?>
     </div>
+    <script src="<?=PROJECT_ROOT;?>js/jquery-3.3.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.18.0/axios.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.18.0/axios.min.map"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="<?=PROJECT_ROOT;?>js/custom.js"></script>
 </body>
 </html>
