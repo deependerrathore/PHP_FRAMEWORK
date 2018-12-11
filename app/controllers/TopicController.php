@@ -1,6 +1,6 @@
 <?php
 
-class Topic extends Controller{
+class TopicController extends Controller{
     
     /**
     * constructor will instantiate the view from parent controller

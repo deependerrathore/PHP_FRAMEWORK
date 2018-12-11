@@ -1,6 +1,6 @@
 <?php 
 
-class Tools extends Controller{
+class ToolsController extends Controller{
     public function __construct($controller, $action){
         parent::__construct($controller,$action);
     }

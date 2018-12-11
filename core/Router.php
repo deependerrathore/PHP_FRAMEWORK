@@ -4,8 +4,8 @@ class Router{
 
     public static function route($url){//$url is defined in index.php
         //controller
-        $controller = (!empty($url) && $url[0] != '') ? ucfirst($url[0]) : DEFAULT_CONTROLLER;//DEFAULT_CONTROLLER @config/config.php
-        $controller_name = $controller;
+        $controller = (!empty($url) && $url[0] != '') ? ucfirst($url[0]).'Controller' : DEFAULT_CONTROLLER . 'Controller';//DEFAULT_CONTROLLER @config/config.php
+        $controller_name = str_replace('Controller','',$controller);
         array_shift($url);//array_shift() shifts the first value of the array off and returns it, shortening the array by one element and moving everything down. All numerical array keys will be modified to start counting from zero while literal keys won't be touched.
         
 
@@ -18,7 +18,8 @@ class Router{
         $grantAccess = self::hasAccess($controller_name,$action_name);
 
         if(!$grantAccess){
-            $controller_name = $controller = ACCESS_RESTRICTED;
+            $controller = ACCESS_RESTRICTED .'Controller';
+            $controller_name = ACCESS_RESTRICTED;
             $action = 'indexAction';
         }
         //Params

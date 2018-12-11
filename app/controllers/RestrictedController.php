@@ -1,6 +1,6 @@
 <?php
 
-class Restricted extends Controller{
+class RestrictedController extends Controller{
     public function __construct($controller,$action){
         parent::__construct($controller,$action);
     }

@@ -1,6 +1,6 @@
 <?php
 
-class Register extends Controller{
+class RegisterController extends Controller{
     
     /**
     * constructor will instantiate the view from parent controller
