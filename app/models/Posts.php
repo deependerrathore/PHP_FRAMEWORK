@@ -6,6 +6,7 @@
 
 class Posts extends Model{
     public function __construct($postId = ''){
+        $this->_softDelete = true;
         $table = 'posts';
         parent::__construct($table);
 
@@ -34,6 +35,7 @@ class Posts extends Model{
         $this->user_id = $currentUser->id;
         $this->likes = 0;
         $this->topics = $this->getTopics($params['postbody']);
+        $this->deleted = 0;
         if ($file['postimg']['error'] == 0) {
             $this->postimg = Image::uploadImage($file,'postimg');
         }
