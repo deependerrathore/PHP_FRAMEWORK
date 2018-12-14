@@ -7,6 +7,10 @@
         "Tool 2": "tools/second",
         "separator":"",
         "Tool 3": "tools/third"
+    },
+    "Contacts":{
+        "My Contacts": "contacts",
+        "Add Contacts": "contacts/add"
     }
 
 }
