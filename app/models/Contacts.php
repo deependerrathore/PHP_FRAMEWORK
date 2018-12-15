@@ -7,6 +7,20 @@ class Contacts extends Model{
         $this->_softDelete = true;
     }
 
+    public static $addValidation =[
+        'fname'=>[
+            'display' =>'First Name',
+            'required'=> true,
+            'max' => 255
+        ],
+        'lname'=>[
+            'display' =>'Last Name',
+            'required'=> true,
+            'max' => 255
+        ]
+
+    ];
+
     public function getAllByUserId($userId, $params=[]){
         $conditions = [
             'conditions' => ['user_id = ?'],

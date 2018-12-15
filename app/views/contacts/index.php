@@ -14,8 +14,8 @@
     <table class="table is-bordered is-striped is-narrow is-hoverable is-fullwidth">
         <thead>
             <tr>
+            <th>S.No</th>
             <th><abbr title="Full name">Name</abbr></th>
-            <th>Team</th>
             <th><abbr title="Email Address">Email</abbr></th>
             <th><abbr title="Work Phone Number">Work Phone</abbr></th>
             <th><abbr title="Cell Phone Number">Cell Phone</abbr></th>
@@ -27,8 +27,8 @@
         </thead>
         <tfoot>
         <tr>
+            <th>S.No</th>
             <th><abbr title="Full name">Name</abbr></th>
-            <th>Team</th>
             <th><abbr title="Email Address">Email</abbr></th>
             <th><abbr title="Work Phone Number">Work Phone</abbr></th>
             <th><abbr title="Cell Phone Number">Cell Phone</abbr></th>
@@ -38,9 +38,10 @@
             </tr>
         </tfoot>
         <tbody>
-        <?php foreach($this->contacts as $contact): ?>
+        <?php $id = 1;?>
+        <?php foreach($this->contacts as $contact):?>
             <tr>
-            <th>1</th>
+            <th><?=$id++?></th>
             <td><?=$contact->displayFullName()?></td>
             <td><?=$contact->email?></td>
             <td><?=$contact->work_phone?></td>
