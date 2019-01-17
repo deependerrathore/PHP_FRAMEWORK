@@ -33,4 +33,44 @@ class Contacts extends Model{
     public function displayFullName(){
         return $this->fname . ' ' . $this->lname;
     }
+
+    public function findByIdAndUserId($contactId,$userId,$params=[]){
+        $conditions = [
+            'conditions'=>['id = ? AND user_id = ?'],
+            'bind'=> [$contactId,$userId]
+        ];
+        $conditions = array_merge($conditions,$params);
+
+        return $this->findFirst($conditions);
+        
+    }
+
+    public function displayAddress(){
+        $address = '';
+
+        if (!empty($this->address)) {
+            $address .= $this->address . '<br>';  
+        }
+        if (!empty($this->address2)) {
+            $address .= $this->address2 . '<br>';  
+        }
+        if (!empty($this->city)) {
+            $address .= $this->city . ', ';  
+        }
+        if (!empty($this->state)) {
+            $address .= $this->state . ', ';  
+        }
+        if (!empty($this->zip)) {
+            $address .= $this->zip . '<br>';  
+        }
+
+        return $address;
+
+    }
+    public function displayAddressLabel(){
+        $html = $this->displayFullName() . '<br />';
+        $html .= $this->displayAddress();
+        return $html;
+
+    }
 }

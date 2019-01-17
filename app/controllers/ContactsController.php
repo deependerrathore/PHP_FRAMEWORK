@@ -32,4 +32,14 @@ class ContactsController extends Controller{
         $this->view->postAction = PROJECT_ROOT . 'contacts/add';
         $this->view->render('contacts/add');
     }
+
+    public function detailsAction($id){
+        $contact = $this->ContactsModel->findByIdAndUserId((int)$id[0], currentUser()->id);
+        if(!$contact){
+            Router::redirect('contacts');
+        }
+
+        $this->view->contact = $contact;
+        $this->view->render('contacts/details');
+    }
 }

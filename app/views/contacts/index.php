@@ -42,7 +42,7 @@
         <?php foreach($this->contacts as $contact):?>
             <tr>
             <th><?=$id++?></th>
-            <td><?=$contact->displayFullName()?></td>
+            <td><a href="<?=PROJECT_ROOT?>contacts/details/<?=$contact->id?>"><?=$contact->displayFullName()?></a></td>
             <td><?=$contact->email?></td>
             <td><?=$contact->work_phone?></td>
             <td><?=$contact->cell_phone?></td>
