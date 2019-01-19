@@ -42,4 +42,14 @@ class ContactsController extends Controller{
         $this->view->contact = $contact;
         $this->view->render('contacts/details');
     }
+
+    public function deleteAction($id){
+        $contact = $this->ContactsModel->findByIdAndUserId((int)$id[0], currentUser()->id);        
+        
+        if($contact){
+            $contact->delete();
+        }
+        Router::redirect('contacts');
+
+    }
 }

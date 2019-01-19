@@ -47,7 +47,7 @@
             <td><?=$contact->work_phone?></td>
             <td><?=$contact->cell_phone?></td>
             <td><?=$contact->home_phone?></td>
-            <td>edit | delete</td>
+            <td>edit | <a class="button is-danger" onclick="if(!confirm('Are you sure?')){return false;}" href="<?=PROJECT_ROOT?>contacts/delete/<?=$contact->id?>"><span><i class="fa fa-trash" aria-hidden="true"></i></span> Delete</a></td>
             </tr>
         </tbody>
         <?php endforeach; ?>
