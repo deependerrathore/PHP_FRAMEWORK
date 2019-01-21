@@ -116,7 +116,7 @@ class Validate{
     }
 
     public function displayErrors()
-    {
+    {   
         $html = '<ul class="menu-list">';
         foreach ($this->_errors as $error) {
             if (is_array($error)) {

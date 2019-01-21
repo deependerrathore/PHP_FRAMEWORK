@@ -11,7 +11,7 @@
         </div>
     </section>
     <section class="container">
-    <table class="table is-bordered is-striped is-narrow is-hoverable is-fullwidth">
+    <table class="table is-bordered is-striped is-narrow is-hoverable is-fullwidth is-hoverable">
         <thead>
             <tr>
             <th>S.No</th>
@@ -47,7 +47,11 @@
             <td><?=$contact->work_phone?></td>
             <td><?=$contact->cell_phone?></td>
             <td><?=$contact->home_phone?></td>
-            <td>edit | <a class="button is-danger" onclick="if(!confirm('Are you sure?')){return false;}" href="<?=PROJECT_ROOT?>contacts/delete/<?=$contact->id?>"><span><i class="fa fa-trash" aria-hidden="true"></i></span> Delete</a></td>
+            <td>  
+            <a class="button is-warning is-small" href="<?=PROJECT_ROOT?>contacts/edit/<?=$contact->id?>"><span><i class="fa fa-edit" aria-hidden="true"></i></span> Edit</a>
+            | 
+            <a class="button is-danger is-small" onclick="if(!confirm('Are you sure?')){return false;}" href="<?=PROJECT_ROOT?>contacts/delete/<?=$contact->id?>"><span><i class="fa fa-trash" aria-hidden="true"></i></span> Delete</a>
+            </td>
             </tr>
         </tbody>
         <?php endforeach; ?>

@@ -12,5 +12,5 @@
     <?=inputBlock('text','Home Phone','home_phone',$this->contact->home_phone,'Home Phone',['class'=>'field'],['class'=>'label'],['class'=>'input']);?>
     <?=inputBlock('text','Work Phone','work_phone',$this->contact->work_phone,'Work Phone',['class'=>'field'],['class'=>'label'],['class'=>'input']);?>
     <a href="<?=PROJECT_ROOT?>contacts/" class="button">Cancel</a>
-    <?= submitTag('Add Contact',['class'=>'field is-grouped is-grouped-right'],['class'=>'control'],['class'=>'button is-primary'])?>
+    <?= submitTag('Save Contact',['class'=>'field is-grouped is-grouped-right'],['class'=>'control'],['class'=>'button is-primary'])?>
 </form>

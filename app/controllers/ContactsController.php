@@ -52,4 +52,23 @@ class ContactsController extends Controller{
         Router::redirect('contacts');
 
     }
+
+    public function editAction($id){
+        $contact = $this->ContactsModel->findByIdAndUserId((int)$id[0],currentUser()->id);
+
+        if(!$contact) Router::redirect('contacts');
+        $validation = new Validate();
+        if($_POST){
+            $contact->assign($_POST);
+            $validation->check($_POST,Contacts::$addValidation);
+            if($validation->passed()){
+                $contact->save();
+                Router::redirect('contacts');
+            }
+        }
+        $this->view->displayErrors = $validation->displayErrors();
+        $this->view->contact = $contact;
+        $this->view->postAction = PROJECT_ROOT . DS . 'contacts' . DS . 'edit' . DS . $contact->id;
+        $this->view->render('contacts/edit');
+    }
 }
