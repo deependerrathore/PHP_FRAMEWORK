@@ -3,6 +3,8 @@
 class Users extends Model{
     private $_isLoggedIn, $_sessionName , $_cookieName;
 
+    public $id, $username,$password,$email,$fname,$lname,$acl,$deleted=0,$whenaccountcreated,$verfied,$profileimg;
+
     public static $currentLoggedInUser = null;
 
     public function __construct($user = ''){
@@ -15,12 +17,14 @@ class Users extends Model{
             if(is_int($user)){
                 $u = $this->_db->findFirst('users',[
                     'conditions' => ['id = ?'],
-                    'bind' => [$user]
+                    'bind' => [$user],
+                    'Users'
                 ]);
             }else{
                 $u = $this->_db->findFirst('users',[
                     'conditions' => ['username = ?'],
-                    'bind' => [$user]
+                    'bind' => [$user],
+                    'Users'
                 ]);
             }
             if($u){

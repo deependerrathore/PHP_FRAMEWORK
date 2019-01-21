@@ -1,47 +1,21 @@
 <?php
 
 class Model{
-    protected $_db,$_table,$_modelName,$_softDelete = false, $_columnsNames = [];
+    protected $_db,$_table,$_modelName,$_softDelete = false;
 
     public $id;
 
     public function __construct($table){
         $this->_db = DB::getInstance();
         $this->_table = $table;
-        $this->_setColumnNames();
         $this->_modelName = str_replace(' ','',ucwords(str_replace('_',' ',$this->_table))); //example user_sessions = UserSessions
 
-    }
-
-    public function _setColumnNames(){
-        $columns = $this->get_columns();
-        foreach($columns as $column){
-            $columnName = $column->Field;
-            $this->_columnsNames[] = $column->Field;
-            $this->{$columnName} = null;
-        }
     }
 
     protected function get_columns(){
         return $this->_db->get_columns($this->_table);
     }
 
-    // public function find($params = []){
-    //     $results = [];
-    //     $resultQuery = $this->_db->find($this->_table,$params);
-    //     if ($resultQuery) {
-    //         foreach($resultQuery as $result){
-    //             $obj = new $this->_modelName($this->_table);
-    //             $obj->populateObjData($result);
-    //             $results[] = $obj;
-    //         }
-    
-    //         return $results;
-    //     }else{
-    //         return false;
-    //     }
-        
-    // }
     
     protected function _softDeleteParams($params){
         if ($this->_softDelete) {
@@ -60,32 +34,17 @@ class Model{
     }
     public function find($params = []){
         $params = $this->_softDeleteParams($params);
-        $results = [];
-        $resultsQuery = $this->_db->find($this->_table,$params);
-        if ($resultsQuery) {
-
-            foreach($resultsQuery as $result){
-                $obj = new $this->_modelName($this->_table);
-                $obj->populateObjData($result);
-                $results[] = $obj;
-            }
-            return $results;
-        }
-
+        $resultsQuery = $this->_db->find($this->_table,$params,get_class($this));
+        if (!$resultsQuery) return false;
         return $resultsQuery;
         
     }
     
     public function findFirst($params = []){
         $params = $this->_softDeleteParams($params);
-        $resultQuery = $this->_db->findFirst($this->_table,$params);
-        $result = new $this->_modelName($this->_table);
-        if ($resultQuery) {
-            $result->populateObjData($resultQuery);
-        }else{
-            return false;
-        }
-        return $result;
+        $resultQuery = $this->_db->findFirst($this->_table,$params,get_class($this));
+        if (!$resultQuery) return false;
+        return $resultQuery;
     }
 
     public function findById($id){
@@ -96,11 +55,8 @@ class Model{
     }
 
     public function save(){
-        $fields = [];
-        foreach($this->_columnsNames as $column){
-            $fields[$column] = $this->$column; //$field[id] = $this->id i.e. actual value;
-        }   
-
+        $fields = getObjectProperties($this);
+        
         //Determine whether to update or insert
         if(property_exists($this,'id') && $this->id != ''){
             return $this->update($this->id,$fields);
@@ -137,8 +93,8 @@ class Model{
 
     public function data(){
         $data = new stdClass();
-        foreach($this->_columnsNames as $column){
-            $data->$column = $this->$column;
+        foreach(getObjectProperties($this) as $column=>$value){
+            $data->$column = $value;
         }
 
         return $data;
@@ -147,7 +103,7 @@ class Model{
     public function assign($params = []){
         if(!empty($params)){
             foreach($params as $key => $value){
-                if(in_array($key,$this->_columnsNames)){
+                if(property_exists($this,$key)){
                     $this->$key = sanatize($value);
                 }
             }

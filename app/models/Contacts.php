@@ -1,6 +1,8 @@
 <?php
 
 class Contacts extends Model{
+    public $id,$user_id,$fname,$lname,$email,$address,$address2,$city,$state,$zip;
+    public $home_phone,$cell_phone,$work_phone,$deleted = 0;
     public function __construct(){
         $table = 'contacts';
         parent::__construct($table);

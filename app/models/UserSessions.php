@@ -1,6 +1,7 @@
 <?php
 
 class UserSessions extends Model{
+    public $id,$user_id,$token,$user_agent;
     public function __construct(){
         $table = 'user_sessions';
         parent::__construct($table);    

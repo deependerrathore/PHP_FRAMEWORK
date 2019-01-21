@@ -21,7 +21,7 @@ class ContactsController extends Controller{
             $validation->check($_POST,Contacts::$addValidation);
             if($validation->passed()){
                 $contact->user_id = currentUser()->id;
-                $contact->deleted = 0;
+                //$contact->deleted = 0;
                 $contact->save();
                 Router::redirect('contacts/index');
             }
