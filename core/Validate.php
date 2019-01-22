@@ -30,11 +30,11 @@ class Validate{
         foreach($items as $item => $rules){
             $item = FH::sanatize($item);
             $display = $rules['display'];
-            foreacFH($rules as $rule => $rule_value){
+            foreach($rules as $rule => $rule_value){
                 $value = FH::sanatize(trim($source[$item]));
 
                 if($rule === 'required' && empty($value)){
-                    $tFHis->addError(["{$display} is required",$item]);
+                    $this->addError(["{$display} is required",$item]);
                 }elseif(!empty($value)){
                     switch($rule){
                         case 'min':
