@@ -9,6 +9,7 @@
                 <div class="column"></div>
                 <div class="column is-4">
                     <form role="form" method="POST" action="<?=PROJECT_ROOT?>register/register">
+                    <?=FH::csrfInput()?>
                             <p class="subtitle is-4 has-text-centered">
                                <strong>Register for an account</strong>
                             </p>

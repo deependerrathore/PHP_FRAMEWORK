@@ -41,6 +41,7 @@
                 <div class="column is-4">
                     <div>
                         <form role="form" method="POST" action="<?=PROJECT_ROOT?>register/login">
+                        <?=FH::csrfInput()?>
                             <p class="subtitle is-4 has-text-centered">
                                <strong>Sign in to your account</strong>
                             </p>

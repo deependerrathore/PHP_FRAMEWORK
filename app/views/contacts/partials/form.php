@@ -1,4 +1,5 @@
 <form action="<?=$this->postAction?>" class="" method="post">
+    <?=FH::csrfInput()?>
     <div><?=$this->displayErrors?></div>
     <?=inputBlock('text','First Name','fname',$this->contact->fname,'First Name',['class'=>'field is-5'],['class'=>'label'],['class'=>'input']);?>
     <?=inputBlock('text','Last Name','lname',$this->contact->lname,'Last Name',['class'=>'field is-5'],['class'=>'label'],['class'=>'input is-5']);?>

@@ -68,7 +68,7 @@ class RegisterController extends Controller{
                     'required' => true,
                     'matches' => 'password'
                 ]
-            ]);
+                ],true);
 
             if($validation->passed()){
                 $newUser = new Users();
@@ -99,7 +99,7 @@ class RegisterController extends Controller{
                     'min' => 6,
                     'max' => 20
                     ]
-                    ]);
+                ],true);
                     
                     if($validation->passed()){
                         
