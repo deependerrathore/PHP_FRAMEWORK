@@ -7,7 +7,7 @@
 
 <h1><?=$this->user->fname?>'s Profile - <?=($this->user->verified == 1)? "Verified Account" : "Unverified Account"?></h1>
 
-<?php if(currentUser()->id != $this->user->id){ ?>
+<?php if(Users::currentUser()->id != $this->user->id){ ?>
 
 <form action="<?=PROJECT_ROOT?>profile/user/<?=$this->user->username?>" method="POST">
     <?php
@@ -19,7 +19,7 @@
 </form>
 <?php }?>
 
-<?php if(currentUser()->id == $this->user->id){ ?>
+<?php if(Users::currentUser()->id == $this->user->id){ ?>
 <form action="<?=PROJECT_ROOT?>profile/user/<?=$this->user->username?>" method="POST" enctype="multipart/form-data">
     <div class="bg-danger"><?=$this->displayErrors?></div>
     <textarea name="postbody" rows="5" cols="80"></textarea><br>
@@ -49,10 +49,10 @@
             }
 
             //form for like dislike button
-            $postString .= "<form action=".PROJECT_ROOT."profile/like/".currentUser()->id."/".$post->id ."/profile"." method=\"POST\">";
+            $postString .= "<form action=".PROJECT_ROOT."profile/like/".Users::currentUser()->id."/".$post->id ."/profile"." method=\"POST\">";
 
             //like and unlike
-            if ($db->query("SELECT id FROM post_likes WHERE user_id = ? AND post_id = ? " , [currentUser()->id,$post->id])->count()) {
+            if ($db->query("SELECT id FROM post_likes WHERE user_id = ? AND post_id = ? " , [Users::currentUser()->id,$post->id])->count()) {
                 $postString .=  "<input type=\"submit\" name=\"unlike\" value=\"Unlike\">";
             }else{
                 $postString .=  "<input type=\"submit\" name=\"like\" value=\"Like\">";
@@ -63,8 +63,8 @@
             //form end
             $postString .= "</form>";
 
-            if(currentUser()->id == $this->user->id){
-                $postString .= "<form action=".PROJECT_ROOT."profile/delete/".currentUser()->id."/".$post->id ."/profile"." method=\"POST\">";
+            if(Users::currentUser()->id == $this->user->id){
+                $postString .= "<form action=".PROJECT_ROOT."profile/delete/".Users::currentUser()->id."/".$post->id ."/profile"." method=\"POST\">";
                 $postString .=  "<input type=\"submit\" name=\"deletepost\" value=\"X\">";
                 $postString .= "</form>";
             }

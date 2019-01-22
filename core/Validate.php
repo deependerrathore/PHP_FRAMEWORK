@@ -28,13 +28,13 @@ class Validate{
             }
         }
         foreach($items as $item => $rules){
-            $item = Input::sanatize($item);
+            $item = FH::sanatize($item);
             $display = $rules['display'];
-            foreach($rules as $rule => $rule_value){
-                $value = Input::sanatize(trim($source[$item]));
+            foreacFH($rules as $rule => $rule_value){
+                $value = FH::sanatize(trim($source[$item]));
 
                 if($rule === 'required' && empty($value)){
-                    $this->addError(["{$display} is required",$item]);
+                    $tFHis->addError(["{$display} is required",$item]);
                 }elseif(!empty($value)){
                     switch($rule){
                         case 'min':

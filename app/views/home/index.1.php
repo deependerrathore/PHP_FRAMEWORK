@@ -15,7 +15,7 @@
     <section class="hero">
         <div class="hero-body">
             <div class="container">
-            <h1 class="title">Welcome to your Timeline - <?=currentUser()->fname?></h1>
+            <h1 class="title">Welcome to your Timeline - <?=Users::currentUser()->fname?></h1>
             <h2 class="subtitle">Event Unacademy</h2>
             </div>
         </div>
@@ -43,8 +43,8 @@
                             <?=Posts::add_link($post->postbody)?>
                             <br>
                             <small><a>
-                                <form action="<?=PROJECT_ROOT?>profile/like/<?=currentUser()->id?>/<?=$post->id?>/home"  method="POST">
-                                        <?php if ($db->query("SELECT id FROM post_likes WHERE user_id = ? AND post_id = ? " , [currentUser()->id,$post->id])->count()): ?>
+                                <form action="<?=PROJECT_ROOT?>profile/like/<?=Users::currentUser()->id?>/<?=$post->id?>/home"  method="POST">
+                                        <?php if ($db->query("SELECT id FROM post_likes WHERE user_id = ? AND post_id = ? " , [Users::currentUser()->id,$post->id])->count()): ?>
                                                     <input type="submit" name="unlike" value="Unlike">
                                                     <i class="fa fa-thumbs-up"></i>
 
@@ -94,7 +94,7 @@
                         </p>
                     </figure>
                     <div class="media-content">
-                        <form action="<?=PROJECT_ROOT?>profile/comment/<?=currentUser()->id?>/<?=$post->id?>/home" method="POST">
+                        <form action="<?=PROJECT_ROOT?>profile/comment/<?=Users::currentUser()->id?>/<?=$post->id?>/home" method="POST">
                             <!-- <div class="bg-danger">$this->displayErrors . "</div>"; -->
                             <div class="field">
                                 <p class="control">

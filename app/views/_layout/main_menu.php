@@ -1,6 +1,6 @@
 <?php 
     $menu = Router::getMenu('menu_acl');
-    $currentPage=  currentPage();
+    $currentPage=  H::currentPage();
 ?>
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
   <a class="navbar-brand" href="<?=PROJECT_ROOT?>home"><?=MENU_BRAND?></a>
@@ -40,9 +40,9 @@
       
     </ul>
     <ul class="navbar-nav ml-auto">
-            <?php if(currentUser()):?>
+            <?php if(Users::currentUser()):?>
                 <li class="nav-item <?=$active?>">
-                    <a class="nav-link" href="<?=PROJECT_ROOT?>profile/user/<?=currentUser()->username?>">Hello <?=currentUser()->fname;?></a>
+                    <a class="nav-link" href="<?=PROJECT_ROOT?>profile/user/<?=Users::currentUser()->username?>">Hello <?=Users::currentUser()->fname;?></a>
                 </li>
             <?php endif;?>
     </ul>

@@ -1,6 +1,6 @@
 <?php 
     $menu = Router::getMenu('menu_acl');
-    $currentPage=  currentPage();
+    $currentPage=  H::currentPage();
 ?>
 <nav class="navbar" role="navigation" aria-label="main navigation">
   <div class="navbar-brand">
@@ -52,9 +52,9 @@
     <div class="navbar-end">
       <div class="navbar-item">
         <div class="buttons">
-          <?php if(currentUser()):?>
+          <?php if(Users::currentUser()):?>
               
-              <a class="navbar-item" href="<?=PROJECT_ROOT?>profile/user/<?=currentUser()->username?>">Hello <?=currentUser()->fname;?></a>
+              <a class="navbar-item" href="<?=PROJECT_ROOT?>profile/user/<?=Users::currentUser()->username?>">Hello <?=Users::currentUser()->fname;?></a>
 
               <a class="button is-primary" href="<?=PROJECT_ROOT?>register/logout">
                   <strong>Log Out</strong>

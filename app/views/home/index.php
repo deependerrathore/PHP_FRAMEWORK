@@ -19,8 +19,8 @@ if ($this->showTimeline == true) {
             $postString .= "<br>";
         }
         
-        $postString .= "<form action=".PROJECT_ROOT."profile/like/".currentUser()->id."/".$post->id."/home"."  method=\"POST\">";
-        if ($db->query("SELECT id FROM post_likes WHERE user_id = ? AND post_id = ? " , [currentUser()->id,$post->id])->count()) {
+        $postString .= "<form action=".PROJECT_ROOT."profile/like/".Users::currentUser()->id."/".$post->id."/home"."  method=\"POST\">";
+        if ($db->query("SELECT id FROM post_likes WHERE user_id = ? AND post_id = ? " , [Users::currentUser()->id,$post->id])->count()) {
             $postString .=  "<input type=\"submit\" name=\"unlike\" value=\"Unlike\">";
         }else{
             $postString .=  "<input type=\"submit\" name=\"like\" value=\"Like\">";
@@ -30,7 +30,7 @@ if ($this->showTimeline == true) {
         $postString .= "<br>";
 
         //this is the comment section 
-        $postString .= "<form action=".PROJECT_ROOT."profile/comment/".currentUser()->id."/".$post->id."/home". " method=\"POST\">";
+        $postString .= "<form action=".PROJECT_ROOT."profile/comment/".Users::currentUser()->id."/".$post->id."/home". " method=\"POST\">";
         $postString .= "<div class=\"bg-danger\">" . $this->displayErrors . "</div>";
         $postString .= "<textarea name=\"commentbody\" rows=\"3\" cols=\"80\"></textarea>";
         $postString .=  "<input type=\"submit\" value=\"Comment\" name=\"comment\"/>";

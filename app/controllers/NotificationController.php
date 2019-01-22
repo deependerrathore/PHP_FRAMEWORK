@@ -30,7 +30,7 @@ class NotificationController extends Controller{
     public function getAllNotificationAction(){
         $notifications = $this->NotificationsModel->find([
             'conditions' => ['receiver = ?'],
-            'bind' => [currentUser()->id],
+            'bind' => [Users::currentUser()->id],
             'order' => "id desc"
         ]);
         $notifications = json_encode($notifications);

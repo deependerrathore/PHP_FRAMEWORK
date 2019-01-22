@@ -91,7 +91,7 @@ class Posts extends Model{
             if(substr($word,0,1) == '@'){
                 $user = new Users(ltrim($word,'@'));
                 if ($user->id) {
-                    $notify[ltrim($word,'@')]  = array("type"=>1,"extra"=> '{"postbody": "' .sanatize($postbody).'"}');
+                    $notify[ltrim($word,'@')]  = array("type"=>1,"extra"=> '{"postbody": "' .FH::sanatize($postbody).'"}');
                 }
             }
         }

@@ -13,12 +13,12 @@ class RegisterController extends Controller{
     
     public function logoutAction($params = ''){
         if ($params == 'all') {
-            if(currentUser()){
-                currentUser()->logoutAll();
+            if(Users::currentUser()){
+                Users::currentUser()->logoutAll();
             }
         }else{
-            if(currentUser()){
-                currentUser()->logout();
+            if(Users::currentUser()){
+                Users::currentUser()->logout();
             }
         }
         
@@ -32,7 +32,7 @@ class RegisterController extends Controller{
 
         $posted_values = ['fname'=>'','lname'=>'','email'=>'','username'=>'','password'=>'','confirm'=>'',];
         if($_POST){
-            $posted_values = posted_values($_POST);
+            $posted_values = FH::posted_values($_POST);
             $validation->check($_POST,[
                 'fname' => [
                     'display' => 'First Name',
@@ -142,8 +142,8 @@ class RegisterController extends Controller{
             ]);
 
             if($validation->passed()){
-                if (password_verify(Input::get('oldpassword'),currentUser()->password)) {
-                    $this->UsersModel->changePassword(currentUser()->id,$_POST);
+                if (password_verify(Input::get('oldpassword'),Users::currentUser()->password)) {
+                    $this->UsersModel->changePassword(Users::currentUser()->id,$_POST);
                     Router::redirect('');//Need to add alert message
                 }else{
                     $validation->addError("There is something wrong with your current password.");

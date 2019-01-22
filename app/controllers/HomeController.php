@@ -8,13 +8,13 @@ class HomeController extends Controller{
     public function indexAction(){
         $showTimeline = false;
         $followingPosts = '';
-        if (currentUser()) {
+        if (Users::currentUser()) {
             $db = DB::getInstance();
             $followingPosts = $db->query("SELECT posts.id,posts.postbody,posts.likes,users.fname,users.lname,users.username,posts.postimg FROM posts,followers,users
             WHERE posts.user_id = followers.user_id
             AND users.id = posts.user_id
             AND follower_id = ?
-            ORDER BY posts.likes DESC",[currentUser()->id])->results();
+            ORDER BY posts.likes DESC",[Users::currentUser()->id])->results();
             $showTimeline = true;
         }
 
@@ -26,7 +26,7 @@ class HomeController extends Controller{
 
     public function searchAction(){
         if (isset($_POST['search'])) {
-            $toSearch = explode(" " ,sanatize($_POST['searchbox']));
+            $toSearch = explode(" " ,FH::sanatize($_POST['searchbox']));
 
             if (count($toSearch) == 1) { //check if the count is 1 i.e. it should be username
                 $toSearch = str_split($toSearch[0],2);//spliting the string in chunk of 2 chars i.e. deepender = de ep en de r                

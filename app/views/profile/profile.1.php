@@ -10,7 +10,7 @@
     <div class="container">
       <h1 class="title"><?=$this->user->fname?>'s Profile </h1>
       <h2 class="subtitle"><?=($this->user->verified == 1)? "Verified Account" : "Unverified Account"?></h2>
-        <?php if(currentUser()->id != $this->user->id): ?>
+        <?php if(Users::currentUser()->id != $this->user->id): ?>
             <form action="<?=PROJECT_ROOT?>profile/user/<?=$this->user->username?>" method="POST">
                 <?php if ($this->isFollowing):?> 
                     <input type="submit" name="unfollow" value="Unfollow" class="button"/>
@@ -23,7 +23,7 @@
   </div>
 
 
-    <?php if(currentUser()->id == $this->user->id):?>
+    <?php if(Users::currentUser()->id == $this->user->id):?>
         <div class="container">
             <div class="columns">
                 <div class="column is-8">
@@ -91,7 +91,7 @@
                         <div class="media-content">
                             <div class="content">
                             <p>
-                                <strong><?=currentUser()->fname .' ' . currentUser()->lname?></strong> <small>@<?=currentUser()->username?></small> <small><?=$post->posted_at?></small>
+                                <strong><?=Users::currentUser()->fname .' ' . Users::currentUser()->lname?></strong> <small>@<?=Users::currentUser()->username?></small> <small><?=$post->posted_at?></small>
                                 <br>
                                 <?=Posts::add_link($post->postbody);?>
                             </p>
@@ -104,8 +104,8 @@
                             <nav class="level is-mobile">
                             <div class="level-left">
                                 <a class="level-item">
-                                    <form action="<?=PROJECT_ROOT?>profile/like/<?=currentUser()->id?>/<?=$post->id?>/profile" method="POST">
-                                        <?php if ($db->query("SELECT id FROM post_likes WHERE user_id = ? AND post_id = ? " , [currentUser()->id,$post->id])->count()):?>
+                                    <form action="<?=PROJECT_ROOT?>profile/like/<?=Users::currentUser()->id?>/<?=$post->id?>/profile" method="POST">
+                                        <?php if ($db->query("SELECT id FROM post_likes WHERE user_id = ? AND post_id = ? " , [Users::currentUser()->id,$post->id])->count()):?>
                                             <input type="submit" name="unlike" value="Unlike">
                                             <i class="fa fa-thumbs-up"></i>
                                         <?php else: ?>
@@ -121,7 +121,7 @@
                             </nav>
                         </div>
                         <div class="media-right">
-                            <form action="<?=PROJECT_ROOT?>profile/delete/<?=currentUser()->id?>/<?=$post->id?>/profile" method="POST">
+                            <form action="<?=PROJECT_ROOT?>profile/delete/<?=Users::currentUser()->id?>/<?=$post->id?>/profile" method="POST">
                                 <button type="submit" name="deletepost" class="delete">
                             </form>
                         </div>

@@ -27,7 +27,7 @@ class ProfileController extends Controller{
             $searchedUserId = $searchedUser->id;
 
             //userid for the current logged in user
-            $followerId = currentUser()->id;
+            $followerId = Users::currentUser()->id;
 
             //creating a object of followermodel
             $db = DB::getInstance();
@@ -75,8 +75,8 @@ class ProfileController extends Controller{
                             
 
                     if ($validation->passed()) {
-                        $post->insertPost($_POST,$_FILES,currentUser());
-                        $username = currentUser()->username;
+                        $post->insertPost($_POST,$_FILES,Users::currentUser());
+                        $username = Users::currentUser()->username;
                         //Router::redirect("profile/user/{$username}");
 
                     }
@@ -179,7 +179,7 @@ class ProfileController extends Controller{
 
             $link = Image::uploadImage($_FILES,'profileimg');
 
-            $this->UsersModel->update(currentUser()->id,['profileimg' => $link]);
+            $this->UsersModel->update(Users::currentUser()->id,['profileimg' => $link]);
 
         }
         $this->view->render('profile/profileimage');
