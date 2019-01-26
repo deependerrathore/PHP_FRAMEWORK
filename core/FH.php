@@ -1,7 +1,10 @@
 <?php 
 
 class FH {
-    
+
+    /**
+     * type , label , name, value , placeholder, div attributes , label attribute and input attributes
+     */
     public static function inputBlock($type , $label,$name,$value= '' , $placeholder ,$divAttrs=[],$labelAttrs=[],$inputAttrs=[]){
         $divString = self::stringfyAttrs($divAttrs);
         $inputString = self::stringfyAttrs($inputAttrs);
@@ -11,7 +14,7 @@ class FH {
         $html .= '<div class="control">';
         $html .= '<input type="'.$type.'" name="'.$name.'" id="'.$name.'" value="'.$value.'" placeholder="'. $placeholder.'" ' . $inputString. '/>';
         $html .= '</div>';
-        $html .= '<div>';
+        $html .= '</div>';
         return $html;
     }
     
@@ -62,5 +65,15 @@ class FH {
         }
         
         return $clean_ary;
+    }
+
+    public static function displayErrors($errors){   
+        $html = '<ul class="menu-list">';
+        foreach ($errors as $field => $error) {
+            $html .= '<li class="has-text-danger">' . $error . '</li>';
+            $html .= '<script>jQuery("document").ready(function(){jQuery("#' . $field . '").addClass("is-danger")});</script>';
+        }
+         $html .= '</ul>';
+         return $html;
     }
 }

@@ -3,7 +3,7 @@
 class Users extends Model{
     private $_isLoggedIn, $_sessionName , $_cookieName;
 
-    public $id, $username,$password,$email,$fname,$lname,$acl,$deleted=0,$whenaccountcreated,$verfied,$profileimg;
+    public $id, $username,$password,$email,$fname,$lname,$acl,$deleted=0,$whenaccountcreated ,$verified = 0,$profileimg;
 
     public static $currentLoggedInUser = null;
 
@@ -38,7 +38,7 @@ class Users extends Model{
     }
 
     public function validator(){
-        $this->runValidation(new MinValidator($this,['field'=>'username','rule'=>6,'msg'=>'Username should be at least 6 characters.']))
+        $this->runValidation(new MinValidator($this,['field'=>'username','rule'=>6,'msg'=>'Username should be at least 6 characters.']));
     }
 
     public function findByUsername($username){

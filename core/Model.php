@@ -57,6 +57,7 @@ class Model{
     public function save(){
 
         $this->validator();
+
         if($this->_validates){
 
             $fields = H::getObjectProperties($this);
@@ -67,7 +68,7 @@ class Model{
                 return $this->insert($fields);
             }
         }
-        
+
         return false;
     }
 
@@ -129,6 +130,7 @@ class Model{
             $this->_validates = false;
             $this->_validationErrors[$key] = $validator->msg; 
         }
+
     }
     
     public function getErrorMessages(){
