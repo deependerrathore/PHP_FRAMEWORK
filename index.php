@@ -23,6 +23,10 @@ function autoload($className){
         require_once(ROOT . DS . 'core' . DS . $className . '.php');
     }elseif(file_exists(ROOT . DS . 'app' . DS . 'models' . DS . $className . '.php')){
         require_once(ROOT . DS . 'app' . DS . 'models' . DS . $className . '.php');
+    }elseif(file_exists(ROOT . DS . 'app' . DS . 'custom_validator' . DS . $className . '.php')){
+        require_once(ROOT . DS . 'app' . DS . 'custom_validator' . DS . $className . '.php');
+    }elseif(file_exists(ROOT . DS . 'core' . DS . 'validators' . DS . $className . '.php')){
+        require_once(ROOT . DS . 'core' . DS . 'validators' . DS . $className . '.php');
     }
 }
 

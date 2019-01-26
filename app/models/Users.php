@@ -37,6 +37,10 @@ class Users extends Model{
 
     }
 
+    public function validator(){
+        $this->runValidation(new MinValidator($this,['field'=>'username','rule'=>6,'msg'=>'Username should be at least 6 characters.']))
+    }
+
     public function findByUsername($username){
         return $this->findFirst([
             'conditions' => 'username = ?',
