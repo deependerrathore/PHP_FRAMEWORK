@@ -27,7 +27,7 @@
                                     <?=FH::inputBlock('email','Email Address','email',$this->newUser->email,'Your Email Address',['class'=>'field is-5'],['class'=>'label'],['class'=>'input']);?>
                                     <?=FH::inputBlock('text','Username','username',$this->newUser->username,'Username',['class'=>'field is-5'],['class'=>'label'],['class'=>'input']);?>
                                     <?=FH::inputBlock('password','Password','password',$this->newUser->password,'Choose Password',['class'=>'field is-5'],['class'=>'label'],['class'=>'input']);?>
-                                    <?=FH::inputBlock('password','Confirm Password','confirm',$this->newUser->password,'Confirm Password',['class'=>'field is-5'],['class'=>'label'],['class'=>'input']);?>
+                                    <?=FH::inputBlock('password','Confirm Password','confirm',$this->newUser->getConfirm(),'Confirm Password',['class'=>'field is-5'],['class'=>'label'],['class'=>'input']);?>
                                     <?= FH::submitTag('Register',['class'=>'field is-grouped is-grouped-right'],['class'=>'control'],['class'=>'button is-primary'])?>
 
                                     <div class="field">

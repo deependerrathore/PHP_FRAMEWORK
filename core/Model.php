@@ -61,6 +61,8 @@ class Model{
         if($this->_validates){
 
             $fields = H::getObjectProperties($this);
+            H::dnd($fields);
+        
             //Determine whether to update or insert
             if(property_exists($this,'id') && $this->id != ''){
                 return $this->update($this->id,$fields);
