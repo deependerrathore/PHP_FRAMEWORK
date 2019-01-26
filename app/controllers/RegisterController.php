@@ -30,9 +30,10 @@ class RegisterController extends Controller{
     public function registerAction(){
         
         $newUser = new Users();
-        if($_POST){
-            $newUser->assign($_POST);
-            $newUser->setConfirm(Input::get('confirm'));
+        if($this->request->isPost()){
+            $this->request->csrfCheck();
+            $newUser->assign($this->request->get());
+            $newUser->setConfirm($this->request->get('confirm'));
             if($newUser->save()){
                 Router::redirect('register/login');
             }

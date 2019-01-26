@@ -61,7 +61,6 @@ class Model{
         if($this->_validates){
 
             $fields = H::getObjectProperties($this);
-            H::dnd($fields);
         
             //Determine whether to update or insert
             if(property_exists($this,'id') && $this->id != ''){
@@ -113,7 +112,7 @@ class Model{
         if(!empty($params)){
             foreach($params as $key => $value){
                 if(property_exists($this,$key)){
-                    $this->$key = FH::sanatize($value);
+                    $this->$key = $value;
                 }
             }
         }
