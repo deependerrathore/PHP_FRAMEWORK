@@ -53,7 +53,14 @@ class Users extends Model{
         $this->runValidation(new MinValidator($this,['field'=>'password','rule'=>6,'msg'=>'Password should be at least 6 characters.']));
 
 
+    }
 
+    public function beforeSave(){
+        $this->fname = ucfirst($this->fname);
+        $this->lname = ucfirst($this->lname);
+        $this->password = password_hash($this->password,PASSWORD_DEFAULT);
+        $this->whenaccountcreated = date('Y-m-d H:i:s');
+        $this->profileimg = 'default';
     }
 
     public function findByUsername($username){
@@ -126,7 +133,7 @@ class Users extends Model{
         if($userSession) $userSession->delete();
         Session::delete(CURRENT_USER_SESSION_NAME);
         if(Cookie::exists(REMEMBER_ME_COOKIE_NAME)){
-            Cookie::delete(REMEMBER_ME_COOKIE_NAME,REMEMBER_ME_COOKEI_EXPIRY);
+            Cookie::delete(REMEMBER_ME_COOKIE_NAME,REMEMBER_ME_COOKIE_EXPIRY);
         }
         self::$currentLoggedInUser = null;
         return true;
@@ -141,18 +148,6 @@ class Users extends Model{
         }
         self::$currentLoggedInUser = null;
         return true;
-    }
-
-    public function registerNewUser($params){
-        $params['fname'] = ucfirst($params['fname']);
-        $params['lname'] = ucfirst($params['lname']);
-        $this->assign($params);
-        $this->deleted = 0;
-        $this->whenaccountcreated = $date = date('Y-m-d H:i:s');
-        $this->verified = 0;
-        $this->profileimg = 'default';
-        $this->password = password_hash($this->password,PASSWORD_DEFAULT);
-        $this->save();
     }
 
     public function acls(){

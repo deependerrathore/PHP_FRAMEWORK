@@ -4,36 +4,6 @@
 
 <?php $this->start('body');?>
 
-<!-- <div class="container">
-    <div class="row">
-        <div class="col-md-6 offset-md-3 well">
-                <h3 class="text-center">Login To Your Account</h3>
-                <p class="text-center">Get Unlimited tips,response questions<br/> free all the time</p>
-                <form action="<?=PROJECT_ROOT?>register/login" class="login" method="POST">
-                    <div class="bg-danger"><?=$this->displayErrors?></div>
-
-                    <div class="form-group">
-                        <label for="username">Username</label>
-                        <input type="text" class="form-control" id="username" name="username" placeholder="Enter Your Username">
-                    </div>
-                    <div class="form-group">
-                        <label for="password">Password</label>
-                        <input type="password" class="form-control" id="password" name="password" placeholder="Password">
-                    </div>
-                    <div class="form-check">
-                        <input type="checkbox" class="form-check-input" id="remember_me" name="remember_me" value="on">
-                        <label class="form-check-label" for="remember_me">Remember Me</label>
-                    </div>
-
-                    <button type="submit" class="btn btn-primary">Login</button>
-                    <div class="text-right">
-                        <a class="text-primary" href="<?=PROJECT_ROOT?>/register/register">If not registered click here?</a>
-                    </div>
-                </form>
-        </div>
-    </div>    
-</div> -->
-
 <section class="section">
         <div class="container">
             <div class="columns">
@@ -64,18 +34,10 @@
                                 </p>
                             </div>
                             <div class="is-divider" data-content="OR LOG IN WITH"></div> -->
-                            <div class="field">
-                                <label class="label">Username</label>
-                                <p class="control">
-                                    <input class="input  is-medium" type="text" name="username" id="username" value="" placeholder="Your Username">                                 
-                                </p>
-                            </div>
-                            <div class="field">
-                                <label class="label">Password</label>
-                                    <p class="control">
-                                        <input class="input  is-medium" type="password" id="password" name="password" placeholder="Your Password">
-                                    </p>
-                            </div>
+                            <?=FH::inputBlock('text','Username','username',$this->login->username,'Username',['class'=>'field is-5'],['class'=>'label'],['class'=>'input']);?>
+
+                            <?=FH::inputBlock('password','Password','password',$this->login->password,'Password',['class'=>'field is-5'],['class'=>'label'],['class'=>'input']);?>
+
                             <div class="field">
                                 <div class="control">
                                     <label class="checkbox">
@@ -97,7 +59,7 @@
                             <div class="field">
                                 <div class="control">
                                     <p class="control">
-                                    <?=$this->displayErrors?> 
+                                    <?=FH::displayErrors($this->displayErrors); ?> 
                                     </p>
                                 </div>
                             </div>

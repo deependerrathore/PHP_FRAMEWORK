@@ -67,7 +67,7 @@ class FH {
         return $clean_ary;
     }
 
-    public static function displayErrors($errors){   
+    public static function displayErrors($errors){  
         $html = '<ul class="menu-list">';
         foreach ($errors as $field => $error) {
             $html .= '<li class="has-text-danger">' . $error . '</li>';

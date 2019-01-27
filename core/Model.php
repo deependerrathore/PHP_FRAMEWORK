@@ -60,13 +60,19 @@ class Model{
 
         if($this->_validates){
 
+            $this->beforeSave();
+
             $fields = H::getObjectProperties($this);
-        
+
             //Determine whether to update or insert
             if(property_exists($this,'id') && $this->id != ''){
-                return $this->update($this->id,$fields);
+                $save = $this->update($this->id,$fields);
+                $this->afterSave();
+                return $save;
             }else{
-                return $this->insert($fields);
+                $save = $this->insert($fields);
+                $this->afterSave();
+                return $save;
             }
         }
 
@@ -146,4 +152,9 @@ class Model{
         $this->_validates = false;
         $this->_validationErrors[$field] = $msg;
     }
+
+    public function beforeSave(){}
+    
+    public function afterSave(){}
+
 }

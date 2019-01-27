@@ -32,7 +32,9 @@ class RegisterController extends Controller{
         $newUser = new Users();
         if($this->request->isPost()){
             $this->request->csrfCheck();
-            $newUser->assign($this->request->get());
+
+            $test = $newUser->assign($this->request->get());
+
             $newUser->setConfirm($this->request->get('confirm'));
             if($newUser->save()){
                 Router::redirect('register/login');
@@ -46,41 +48,32 @@ class RegisterController extends Controller{
     
     
     public function loginAction(){
-        
-        $validation = new Validate();
-        
-        if($_POST){
-            //form validation 
-            $validation->check($_POST,[
-                'username' =>[
-                    'display' =>"Username",
-                    'required' => true
-                ],
-                'password' => [
-                    'display' => "Password",
-                    'required' => true,
-                    'min' => 6,
-                    'max' => 20
-                    ]
-                ],true);
-                
-                if($validation->passed()){
-                    
-                    //we are defining UsersModel in Controller
-                    $user = $this->UsersModel->findByUsername($_POST['username']);
-                    
-                    if($user && password_verify(Input::get('password'),$user->password)){
-                        $remember = (isset($_POST['remember_me']) && Input::get('remember_me')) ? true : false;
-                        $user->login($remember); //since $user is the object we can call method on it
-                        Router::redirect('');
-                    }else{
-                        $validation->addError("There is something wrong with your username or password.");
-                    }
+        $loginModel = new Login();
+
+        if($this->request->isPost()){
+            $this->request->csrfCheck();
+            $loginModel->assign($this->request->get());
+            $loginModel->validator();
+            
+            if($loginModel->validationPassed()){
+                //we are defining UsersModel in Controller
+                $user = $this->UsersModel->findByUsername($this->request->get('username'));
+
+                if ($user && password_verify($this->request->get('password'), $user->password)) {
+                    $remember = $loginModel->getRememberMeChecked();
+                    $user->login($remember); //since $user is the object we can call method on it
+                    Router::redirect('');
+                } else {
+                    $loginModel->addErrorMessage("username","There is something wrong with your username or password.");
                 }
             }
-            $this->view->displayErrors = $validation->displayErrors();
-            $this->view->render('register/login');
+            
+            
         }
+            $this->view->login = $loginModel;
+            $this->view->displayErrors = $loginModel->getErrorMessages();
+            $this->view->render('register/login');
+    }
         
         public function changepasswordAction(){
             $validation = new Validate();
