@@ -1,5 +1,9 @@
 <?php
 
+namespace Core;
+
+use Core\FH;
+use Core\Router;
 class Input{
 
     public function isPost(){

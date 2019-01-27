@@ -1,3 +1,6 @@
+<?php
+use Core\FH; 
+?>
 <form action="<?=$this->postAction?>" class="" method="post">
     <?=FH::csrfInput()?>
     <div><?=FH::displayErrors($this->displayErrors)?></div>

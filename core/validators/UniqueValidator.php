@@ -1,5 +1,8 @@
 <?php 
 
+namespace Core\Validators;
+use Core\Validators\CustomValidator;
+
 class UniqueValidator extends CustomValidator{
     public function runValidation(){
         $field = (is_array($this->field)) ? $this->field[0] : $this->field;

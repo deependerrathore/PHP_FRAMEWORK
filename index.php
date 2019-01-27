@@ -1,5 +1,8 @@
 <?php
-
+use Core\Session;
+use Core\Cookie;
+use Core\Router;
+use App\Models\Users;
 session_start();
 
 define('DS', DIRECTORY_SEPARATOR); //Windows = \ , Linux,Mac = /
@@ -15,18 +18,27 @@ require_once(ROOT . DS . 'config' . DS . 'config.php');
 
 
 //Autoload the class from controllers, modals and core folder
-function autoload($className){
+// function autoload($className){
 
-    if (file_exists(ROOT . DS . 'app' . DS . 'controllers' . DS . $className . '.php')) {
-        require_once(ROOT . DS . 'app' . DS . 'controllers' . DS . $className . '.php');
-    }elseif(file_exists(ROOT . DS . 'core' . DS . $className . '.php')){
-        require_once(ROOT . DS . 'core' . DS . $className . '.php');
-    }elseif(file_exists(ROOT . DS . 'app' . DS . 'models' . DS . $className . '.php')){
-        require_once(ROOT . DS . 'app' . DS . 'models' . DS . $className . '.php');
-    }elseif(file_exists(ROOT . DS . 'app' . DS . 'custom_validator' . DS . $className . '.php')){
-        require_once(ROOT . DS . 'app' . DS . 'custom_validator' . DS . $className . '.php');
-    }elseif(file_exists(ROOT . DS . 'core' . DS . 'validators' . DS . $className . '.php')){
-        require_once(ROOT . DS . 'core' . DS . 'validators' . DS . $className . '.php');
+//     if (file_exists(ROOT . DS . 'app' . DS . 'controllers' . DS . $className . '.php')) {
+//         require_once(ROOT . DS . 'app' . DS . 'controllers' . DS . $className . '.php');
+//     }elseif(file_exists(ROOT . DS . 'core' . DS . $className . '.php')){
+//         require_once(ROOT . DS . 'core' . DS . $className . '.php');
+//     }elseif(file_exists(ROOT . DS . 'app' . DS . 'models' . DS . $className . '.php')){
+//         require_once(ROOT . DS . 'app' . DS . 'models' . DS . $className . '.php');
+//     }elseif(file_exists(ROOT . DS . 'app' . DS . 'custom_validator' . DS . $className . '.php')){
+//         require_once(ROOT . DS . 'app' . DS . 'custom_validator' . DS . $className . '.php');
+//     }elseif(file_exists(ROOT . DS . 'core' . DS . 'validators' . DS . $className . '.php')){
+//         require_once(ROOT . DS . 'core' . DS . 'validators' . DS . $className . '.php');
+//     }
+// }
+function autoload($className){
+    $classArray = explode('\\',$className);
+    $class = array_pop($classArray);
+    $subPath = strtolower(implode(DS,$classArray));
+    $path = ROOT . DS . $subPath . DS . $class . '.php';
+    if (file_exists($path)) {
+        require_once($path);
     }
 }
 

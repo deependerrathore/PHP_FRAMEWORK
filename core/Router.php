@@ -1,5 +1,8 @@
 <?php
 
+namespace Core;
+use Core\Session;
+use App\Models\Users;
 class Router{
 
     public static function route($url){//$url is defined in index.php
@@ -24,9 +27,10 @@ class Router{
         }
         //Params
         $queryParams = $url;
-
+        $controller = 'App\Controllers\\' . $controller;
         //Checking the the controller existing or not
         if (class_exists($controller)) {
+
             $dispatch = new $controller($controller_name,$action_name);
         }else{
             die("CLASS {$controller} does not exists");

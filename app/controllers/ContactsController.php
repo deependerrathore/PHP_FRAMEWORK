@@ -1,5 +1,13 @@
 <?php 
 
+namespace App\Controllers;
+
+use Core\Controller;
+use Core\Session;
+use Core\Router;
+use App\Models\Users;
+use App\Models\Contacts;
+
 class ContactsController extends Controller{
 
     public function __construct($controller, $action){
@@ -8,8 +16,6 @@ class ContactsController extends Controller{
     }
 
     public function indexAction(){
-        Session::addMsg("success","Contact has been successfully deleted");
-
         $contacts = $this->ContactsModel->getAllByUserId(Users::currentUser()->id,['order'=>'lname,fname']);
         $this->view->contacts = $contacts;
         $this->view->render('contacts/index');

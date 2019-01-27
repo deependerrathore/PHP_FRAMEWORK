@@ -1,3 +1,6 @@
+<?php 
+use Core\FH;
+?>
 <?php $this->setSiteTitle('Event Unacademy - Login');?>
 <?php $this->start('head'); ?>
 <?php $this->end();?>

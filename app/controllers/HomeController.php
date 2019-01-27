@@ -1,5 +1,12 @@
 <?php
 
+namespace App\Controllers;
+use Core\Controller;
+use Core\DB;
+use Core\FH;
+use App\Models\Users;
+
+
 class HomeController extends Controller{
     
     public function __construct($controller, $action){

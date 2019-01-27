@@ -1,5 +1,20 @@
 <?php
 
+namespace App\Models;
+use Core\Model;
+
+use App\Models\Users as Users;
+use App\Models\UserSessions;
+use Core\Session;
+use Core\Cookie;
+use Core\FH;
+use Core\Validators\MinValidator;
+use Core\Validators\MaxValidator;
+use Core\Validators\RequiredValidator;
+use Core\Validators\EmailValidator;
+use Core\Validators\UniqueValidator;
+use Core\Validators\MatchesValidator;
+
 class Users extends Model{
     private $_isLoggedIn, $_sessionName , $_cookieName, $_confirm;
 

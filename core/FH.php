@@ -1,5 +1,7 @@
 <?php 
 
+namespace Core;
+use Core\Session;
 class FH {
 
     /**

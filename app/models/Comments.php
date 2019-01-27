@@ -1,5 +1,9 @@
 <?php
 
+namespace App\Models;
+
+use Core\Model;
+use Core\DB;
 /**
  * Need to create relation with post table
  */

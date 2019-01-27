@@ -1,5 +1,10 @@
 <?php
 
+namespace App\Models;
+use Core\Model;
+use Core\Validators\RequiredValidator;
+use Core\Validators\MaxValidator;
+
 class Contacts extends Model{
     public $id,$user_id,$fname,$lname,$email,$address,$address2,$city,$state,$zip;
     public $home_phone,$cell_phone,$work_phone,$deleted = 0;

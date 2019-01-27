@@ -1,5 +1,7 @@
 <?php 
 
+namespace Core\Validators;
+use Core\Validators\CustomValidator;
 class EmailValidator extends CustomValidator{
     public function runValidation(){
         $email = $this->_model->{$this->field};

@@ -1,5 +1,7 @@
 <?php
 
+namespace Core;
+
 class Model{
     protected $_db,$_table,$_modelName,$_softDelete=false,$_validates=true, $_validationErrors=[];
 

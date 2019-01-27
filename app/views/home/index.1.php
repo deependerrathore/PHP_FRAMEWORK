@@ -1,3 +1,8 @@
+<?php 
+use Core\DB;
+use App\Models\Comments;
+use App\Models\Users;
+?>
 <?php $this->setSiteTitle('Home'); ?>
 
 <?php $this->start('head'); //this will start the head output buffer and all of the centent before end() will be hold in this ob ?> 

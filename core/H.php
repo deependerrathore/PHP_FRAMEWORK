@@ -1,6 +1,6 @@
 <?php 
 
-
+namespace Core;
 class H{
     
     //helper dnd function
