@@ -1,6 +1,6 @@
 <form action="<?=$this->postAction?>" class="" method="post">
     <?=FH::csrfInput()?>
-    <div><?=$this->displayErrors?></div>
+    <div><?=FH::displayErrors($this->displayErrors)?></div>
     <?=FH::inputBlock('text','First Name','fname',$this->contact->fname,'First Name',['class'=>'field is-5'],['class'=>'label'],['class'=>'input']);?>
     <?=FH::inputBlock('text','Last Name','lname',$this->contact->lname,'Last Name',['class'=>'field is-5'],['class'=>'label'],['class'=>'input is-5']);?>
     <?=FH::inputBlock('text','Email','email',$this->contact->email,'Email',['class'=>'field'],['class'=>'label'],['class'=>'input']);?>

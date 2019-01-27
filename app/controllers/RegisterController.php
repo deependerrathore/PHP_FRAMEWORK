@@ -33,7 +33,7 @@ class RegisterController extends Controller{
         if($this->request->isPost()){
             $this->request->csrfCheck();
 
-            $test = $newUser->assign($this->request->get());
+            $newUser->assign($this->request->get());
 
             $newUser->setConfirm($this->request->get('confirm'));
             if($newUser->save()){

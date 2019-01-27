@@ -15,20 +15,16 @@ class ContactsController extends Controller{
 
     public function addAction(){
         $contact = new Contacts();
-        $validation = new Validate();
-        if ($_POST) {
-            $contact->assign($_POST);
-            $validation->check($_POST,Contacts::$addValidation,true);
-            if($validation->passed()){
-                $contact->user_id = Users::currentUser()->id;
-                //$contact->deleted = 0;
-                $contact->save();
+        if ($this->request->isPost()) {
+            $this->request->csrfCheck();
+            $contact->assign($this->request->get());
+            $contact->user_id = Users::currentUser()->id;
+            if($contact->save()){
                 Router::redirect('contacts/index');
             }
-            
         }
         $this->view->contact = $contact;
-        $this->view->displayErrors = $validation->displayErrors();
+        $this->view->displayErrors = $contact->getErrorMessages();
         $this->view->postAction = PROJECT_ROOT . 'contacts/add';
         $this->view->render('contacts/add');
     }
@@ -57,16 +53,17 @@ class ContactsController extends Controller{
         $contact = $this->ContactsModel->findByIdAndUserId((int)$id[0],Users::currentUser()->id);
 
         if(!$contact) Router::redirect('contacts');
-        $validation = new Validate();
-        if($_POST){
-            $contact->assign($_POST);
-            $validation->check($_POST,Contacts::$addValidation,true);
-            if($validation->passed()){
-                $contact->save();
+        if($this->request->isPost()){
+            $this->request->csrfCheck();
+
+            $contact->assign($this->request->get());
+
+            if($contact->save()){
                 Router::redirect('contacts');
             }
+            
         }
-        $this->view->displayErrors = $validation->displayErrors();
+        $this->view->displayErrors = $contact->getErrorMessages();
         $this->view->contact = $contact;
         $this->view->postAction = PROJECT_ROOT . DS . 'contacts' . DS . 'edit' . DS . $contact->id;
         $this->view->render('contacts/edit');

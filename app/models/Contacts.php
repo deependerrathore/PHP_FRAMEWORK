@@ -9,19 +9,15 @@ class Contacts extends Model{
         $this->_softDelete = true;
     }
 
-    public static $addValidation =[
-        'fname'=>[
-            'display' =>'First Name',
-            'required'=> true,
-            'max' => 255
-        ],
-        'lname'=>[
-            'display' =>'Last Name',
-            'required'=> true,
-            'max' => 255
-        ]
+    
+    public function validator(){
+        $this->runValidation(new MaxValidator($this,['field'=>'fname','rule'=> 156, 'msg'=>"First name should not be more than 156 characters."]));
+        $this->runValidation(new RequiredValidator($this,['field'=>'fname','msg'=>"First name is required"]));
 
-    ];
+        $this->runValidation(new MaxValidator($this,['field'=>'lname','rule'=> 156,'msg'=>"Last name should not be more than 156 characters."]));
+        $this->runValidation(new RequiredValidator($this,['field'=>'lname','msg'=>"Last name is required"]));
+
+    }
 
     public function getAllByUserId($userId, $params=[]){
         $conditions = [
