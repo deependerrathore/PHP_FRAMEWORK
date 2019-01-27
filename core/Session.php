@@ -25,4 +25,31 @@ class Session{
         $newString = preg_replace($regex,'',$uagent);
         return $newString;
     }
+
+    public static function displayMsg(){
+        $alerts = ['is-info','is-success','is-warning','is-danger'];
+        $html = '';
+        foreach($alerts as $alert){
+            if (self::exists($alert)) {
+                $html .= '<div  id="alert" class="notification '.$alert.'">';
+                $html .= '<button class="delete" onclick="document.getElementById(\'alert\').remove()"></button>';
+                $html .= self::get($alert);
+                $html .= '</div>';
+                self::delete($alert);
+            }
+        }
+        return $html;
+    }
+
+    /**
+     * Adds the message to the session
+     *
+     * @param [string] $type can be info, danger, warning and success
+     * @param [string] $message is the actual message to be displayed
+     * @return void
+     */
+    public static function addMsg($type,$msg){
+        $sessionName = 'is-' . $type;
+        self::set($sessionName,$msg);
+    }
 }

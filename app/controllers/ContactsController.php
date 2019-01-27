@@ -8,6 +8,8 @@ class ContactsController extends Controller{
     }
 
     public function indexAction(){
+        Session::addMsg("success","Contact has been successfully deleted");
+
         $contacts = $this->ContactsModel->getAllByUserId(Users::currentUser()->id,['order'=>'lname,fname']);
         $this->view->contacts = $contacts;
         $this->view->render('contacts/index');
@@ -44,6 +46,7 @@ class ContactsController extends Controller{
         
         if($contact){
             $contact->delete();
+            Session::addMsg("success","Contact has been successfully deleted");
         }
         Router::redirect('contacts');
 

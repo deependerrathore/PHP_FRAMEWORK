@@ -16,6 +16,7 @@
 <body>
     <?php include('bulma--main_menu.php'); ?>
     <div class="container-fluid" style="min-height:cal(100% - 125px);">
+        <?= Session::displayMsg();?>
         <?=$this->content('body');?>
     </div>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.18.0/axios.min.js"></script>
