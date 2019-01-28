@@ -1,5 +1,15 @@
 <?php
 
+namespace App\Controllers;
+use Core\Controller;
+use Core\Router;
+use Core\Image;
+use Core\DB;
+use Core\Validate;
+use App\Models\Posts;
+use App\Models\Users;
+use App\Models\PostLikes;
+
 class ProfileController extends Controller{
     public function __construct($controller, $action){
         parent::__construct($controller,$action);

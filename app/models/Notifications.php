@@ -1,6 +1,10 @@
 <?php
 
+namespace App\Models;
+use Core\Model;
+use App\Models\Users;
 class Notifications extends Model{
+    public $id,$type,$receiver,$sender,$extra;
     public function __construct(){
         $table = 'notifications';
         parent::__construct($table);

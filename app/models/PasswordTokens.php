@@ -1,6 +1,7 @@
 <?php
 
 class PasswordTokens extends Model{
+    public $id,$token,$user_id;
     public function __construct(){
         $table = 'password_tokens';
         parent::__construct($table);    

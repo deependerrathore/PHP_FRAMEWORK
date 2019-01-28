@@ -1,10 +1,11 @@
 <?php
 
-/**
- * Need to create relation with postlikes , user_id and posts table
- */
-
+namespace App\Models;
+use Core\Model;
+use Core\DB;
+use App\Models\Posts;
 class PostLikes extends Model{
+    public $id,$user_id,$post_id;
     public function __construct(){
         $table = 'post_likes';
         parent::__construct($table);

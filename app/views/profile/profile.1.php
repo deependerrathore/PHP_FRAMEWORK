@@ -1,3 +1,8 @@
+<?php 
+use App\Models\Users;
+use Core\DB;
+use App\Models\Posts;
+?>
 <?php $this->setSiteTitle('Profile');?>
 
 <?php $this->start('head'); ?>

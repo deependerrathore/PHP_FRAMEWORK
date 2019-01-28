@@ -1,6 +1,10 @@
 <?php
 
+namespace App\Models;
+use Core\Model;
+use Core\DB;
 class Followers extends Model{
+    public $id,$user_id,$follower_id;
     public function __construct(){
         $table = 'followers';
         parent::__construct($table);

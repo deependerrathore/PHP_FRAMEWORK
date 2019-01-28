@@ -1,10 +1,12 @@
 <?php
 
-/**
- * Need to create relation with post table
- */
+namespace App\Models;
+use Core\Model;
+use App\Models\Users;
+
 
 class Posts extends Model{
+    public $id, $postbody,$posted_at,$user_id,$likes,$postimg,$topics,$deleted;
     public function __construct($postId = ''){
         $this->_softDelete = true;
         $table = 'posts';

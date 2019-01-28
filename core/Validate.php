@@ -1,5 +1,7 @@
 <?php
 
+namespace Core;
+
 class Validate{
     private $_passed = false, $_errors = [] , $_db = null;
 

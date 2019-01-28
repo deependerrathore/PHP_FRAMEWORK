@@ -9,6 +9,7 @@ use Core\DB;
  */
 
 class Comments extends Model{
+    public $id,$commentbody,$user_id,$posted_at,$post_id;
     public function __construct(){
         $table = 'comments';
         parent::__construct($table);
