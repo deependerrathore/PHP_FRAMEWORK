@@ -14,6 +14,7 @@ use Core\Validators\RequiredValidator;
 use Core\Validators\EmailValidator;
 use Core\Validators\UniqueValidator;
 use Core\Validators\MatchesValidator;
+use Core\Validators\UsernameValidator;
 
 class Users extends Model{
     private $_isLoggedIn, $_sessionName , $_cookieName, $_confirm;
@@ -62,6 +63,7 @@ class Users extends Model{
         $this->runValidation(new MinValidator($this,['field'=>'username','rule'=>6,'msg'=>'Username should be at least 6 characters.']));
         $this->runValidation(new MaxValidator($this,['field'=>'username','rule'=>150,'msg'=>'Username should be not more than 150 characters.']));
         $this->runValidation(new UniqueValidator($this,['field'=>'username','msg'=>'Username already exist. Please choose another username.']));
+        $this->runValidation(new UsernameValidator($this,['field'=>'username','msg'=>'Username must be valid. only _ is acceptable as special character.']));
 
         $this->runValidation(new RequiredValidator($this,['field'=>'password','msg' => 'Password is required.']));
         $this->runValidation(new MatchesValidator($this,['field'=>'password','rule'=>$this->_confirm,'msg'=>'Password and confirm password do not match.']));
