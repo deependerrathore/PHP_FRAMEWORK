@@ -5,9 +5,22 @@ use Core\Session;
 class FH {
 
     /**
-     * type , label , name, value , placeholder, div attributes , label attribute and input attributes
+     * Creates an input block to be used in a form
+     *
+     * @param string $type type of input i.e text , password ,phone
+     * @param string $label The label that will be used for input
+     * @param string $name the id and name of the input will be set to this value
+     * @param string $value (optional) The value of the input
+     * @param string $placeholder placeholder for the text box
+     * @param array $divAttrs (optional) attributes of the surrounding div
+     * @param array $labelAttrs (optional) attributes of the surrouding lable
+     * @param array $inputAttrs (optional) attributes of the input
+     * @param array $errors (optional) array of all errors
+     * @return string returns an html string for input block
      */
-    public static function inputBlock($type , $label,$name,$value= '' , $placeholder ,$divAttrs=[],$labelAttrs=[],$inputAttrs=[]){
+    public static function inputBlock($type , $label,$name,$value= '' , $placeholder ,$divAttrs=[],$labelAttrs=[],$inputAttrs=[],$errors=[]){
+        $inputAttrs = self::blockErrors($inputAttrs,$errors,$name);
+        //if(!empty($errors)) H::dnd($inputAttrs);
         $divString = self::stringfyAttrs($divAttrs);
         $inputString = self::stringfyAttrs($inputAttrs);
         $labelString = self::stringfyAttrs($labelAttrs);
@@ -15,6 +28,7 @@ class FH {
         $html .= '<label '. $labelString .' for="'.$name.'">'.$label. '</label>';
         $html .= '<div class="control">';
         $html .= '<input type="'.$type.'" name="'.$name.'" id="'.$name.'" value="'.$value.'" placeholder="'. $placeholder.'" ' . $inputString. '/>';
+        $html .= '<span class="help is-danger">'. self::errorMsg($errors,$name).' </span>';
         $html .= '</div>';
         $html .= '</div>';
         return $html;
@@ -77,5 +91,38 @@ class FH {
         }
          $html .= '</ul>';
          return $html;
+    }
+
+
+    /**
+     * Adds a class to the surrounding input array if there are errors. This is used to style the form elements
+     *
+     * @param  array $inputAttr default input attributes array  
+     * @param array $errors passed in the form errors
+     * @param string $name name of the field
+     * @return array
+     */
+    public static function blockErrors($inputAttr ,$errors,$name){
+        if (array_key_exists($name,$errors)) {
+           if (array_key_exists('class',$divAttrs)) {
+               $divAttrs['class'] .= " is-danger";
+           }else{
+               $divAttrs['class'] = "is-danger";
+           }
+        }
+
+        return $divAttrs;
+    }
+
+    /**
+     * Returns an error message for the input
+     *
+     * @param array $errors pass in the form errors
+     * @param string $name id and name of the input
+     * @return string returs the error message from the form error
+     */
+    public static function errorMsg($errors,$name){
+        $msg = (array_key_exists($name,$errors)) ? $errors[$name] : "";
+        return $msg;
     }
 }

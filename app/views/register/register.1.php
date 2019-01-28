@@ -25,21 +25,21 @@ use Core\FH;
                                             </p>
                                         </div>
                                     </div>
-                                    <?=FH::inputBlock('text','First Name','fname',$this->newUser->fname,'Your First Name',['class'=>'field is-5'],['class'=>'label'],['class'=>'input']);?>
-                                    <?=FH::inputBlock('text','Last Name','lname',$this->newUser->lname,' Your Last Name',['class'=>'field is-5'],['class'=>'label'],['class'=>'input']);?>
-                                    <?=FH::inputBlock('email','Email Address','email',$this->newUser->email,'Your Email Address',['class'=>'field is-5'],['class'=>'label'],['class'=>'input']);?>
-                                    <?=FH::inputBlock('text','Username','username',$this->newUser->username,'Username',['class'=>'field is-5'],['class'=>'label'],['class'=>'input']);?>
-                                    <?=FH::inputBlock('password','Password','password',$this->newUser->password,'Choose Password',['class'=>'field is-5'],['class'=>'label'],['class'=>'input']);?>
-                                    <?=FH::inputBlock('password','Confirm Password','confirm',$this->newUser->getConfirm(),'Confirm Password',['class'=>'field is-5'],['class'=>'label'],['class'=>'input']);?>
+                                    <?=FH::inputBlock('text','First Name','fname',$this->newUser->fname,'Your First Name',['class'=>'field is-5'],['class'=>'label'],['class'=>'input'],$this->displayErrors);?>
+                                    <?=FH::inputBlock('text','Last Name','lname',$this->newUser->lname,' Your Last Name',['class'=>'field is-5'],['class'=>'label'],['class'=>'input'],$this->displayErrors);?>
+                                    <?=FH::inputBlock('email','Email Address','email',$this->newUser->email,'Your Email Address',['class'=>'field is-5'],['class'=>'label'],['class'=>'input'],$this->displayErrors);?>
+                                    <?=FH::inputBlock('text','Username','username',$this->newUser->username,'Username',['class'=>'field is-5'],['class'=>'label'],['class'=>'input'],$this->displayErrors);?>
+                                    <?=FH::inputBlock('password','Password','password',$this->newUser->password,'Choose Password',['class'=>'field is-5'],['class'=>'label'],['class'=>'input'],$this->displayErrors);?>
+                                    <?=FH::inputBlock('password','Confirm Password','confirm',$this->newUser->getConfirm(),'Confirm Password',['class'=>'field is-5'],['class'=>'label'],['class'=>'input'],$this->displayErrors);?>
                                     <?= FH::submitTag('Register',['class'=>'field is-grouped is-grouped-right'],['class'=>'control'],['class'=>'button is-primary'])?>
 
-                                    <div class="field">
+                                    <!-- <div class="field">
                                         <div class="control">
                                             <p class="control">
                                             <?= FH::displayErrors($this->displayErrors);?> 
                                             </p>
                                         </div>
-                                    </div>
+                                    </div> -->
                     </form>
                 </div>
                 <div class="column"></div>

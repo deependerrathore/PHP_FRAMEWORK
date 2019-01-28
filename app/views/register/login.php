@@ -37,9 +37,9 @@ use Core\FH;
                                 </p>
                             </div>
                             <div class="is-divider" data-content="OR LOG IN WITH"></div> -->
-                            <?=FH::inputBlock('text','Username','username',$this->login->username,'Username',['class'=>'field is-5'],['class'=>'label'],['class'=>'input']);?>
+                            <?=FH::inputBlock('text','Username','username',$this->login->username,'Username',['class'=>'field is-5'],['class'=>'label'],['class'=>'input'],$this->displayErrors);?>
 
-                            <?=FH::inputBlock('password','Password','password',$this->login->password,'Password',['class'=>'field is-5'],['class'=>'label'],['class'=>'input']);?>
+                            <?=FH::inputBlock('password','Password','password',$this->login->password,'Password',['class'=>'field is-5'],['class'=>'label'],['class'=>'input'],$this->displayErrors);?>
 
                             <div class="field">
                                 <div class="control">
@@ -59,13 +59,13 @@ use Core\FH;
                                     </p>
                                 </div>
                             </div>
-                            <div class="field">
+                            <!-- <div class="field">
                                 <div class="control">
                                     <p class="control">
                                     <?=FH::displayErrors($this->displayErrors); ?> 
                                     </p>
                                 </div>
-                            </div>
+                            </div> -->
                             <div class="field">
                                 <div class="control">
                                     <p class="control has-text-centered">
