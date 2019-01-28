@@ -104,14 +104,14 @@ class FH {
      */
     public static function blockErrors($inputAttr ,$errors,$name){
         if (array_key_exists($name,$errors)) {
-           if (array_key_exists('class',$divAttrs)) {
-               $divAttrs['class'] .= " is-danger";
+           if (array_key_exists('class',$inputAttr)) {
+               $inputAttr['class'] .= " is-danger";
            }else{
-               $divAttrs['class'] = "is-danger";
+               $inputAttr['class'] = "is-danger";
            }
         }
 
-        return $divAttrs;
+        return $inputAttr;
     }
 
     /**
