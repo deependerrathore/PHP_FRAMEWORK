@@ -27,13 +27,12 @@ class UserSessions extends Model{
         }
     }
 
-    public static function deleteCookiesFromAllDevice(){
+    public static function deleteSessionsForAllDevice(){
         $userSession  = new self();
         if(Cookie::exists(REMEMBER_ME_COOKIE_NAME)){
-            $userSession = $userSession->_db->query("DELETE FROM user_sessions WHERE user_id = ?", [Users::currentLoggedInUser()->id]);
+            $userSession = $userSession->_db->query("DELETE FROM user_sessions WHERE user_id = ?", [Users::currentUser()->id]);
             if(!$userSession) return false;
-
-            return true;
+            return $userSession;
         }
     }
 }

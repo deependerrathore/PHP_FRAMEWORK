@@ -13,7 +13,7 @@ use Core\FH;
                 <div class="column"></div>
                 <div class="column is-4">
                     <div>
-                        <form role="form" method="POST" action="<?=PROJECT_ROOT?>register/login">
+                        <form role="form" method="POST" action="<?=$this->postAction?>">
                         <?=FH::csrfInput()?>
                             <p class="subtitle is-4 has-text-centered">
                                <strong>Sign in to your account</strong>
@@ -22,7 +22,7 @@ use Core\FH;
                                 <div class="control">
                                     <p class="control has-text-centered">
                                         Don't have an account yet?
-                                        <a href="<?=PROJECT_ROOT?>/register/register">Sign up here</a>
+                                        <a href="<?=PROJECT_ROOT?>register/register">Sign up here</a>
                                     </p>
                                 </div>
                             </div>

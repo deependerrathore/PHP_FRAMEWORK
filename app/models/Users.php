@@ -8,6 +8,7 @@ use App\Models\UserSessions;
 use Core\Session;
 use Core\Cookie;
 use Core\FH;
+use Core\H;
 use Core\Validators\MinValidator;
 use Core\Validators\MaxValidator;
 use Core\Validators\RequiredValidator;
@@ -59,6 +60,7 @@ class Users extends Model{
         $this->runValidation(new RequiredValidator($this,['field'=>'email','msg' => 'Email is required.']));
         $this->runValidation(new EmailValidator($this,['field'=>'email','msg' => 'Your must provide a valid email address.']));
         $this->runValidation(new MaxValidator($this,['field'=>'email','rule'=>150,'msg'=>'Email should be not more than 150 characters.']));
+        $this->runValidation(new UniqueValidator($this,['field'=>'email','msg'=>'Email in use. Please choose another email.']));
 
         $this->runValidation(new MinValidator($this,['field'=>'username','rule'=>6,'msg'=>'Username should be at least 6 characters.']));
         $this->runValidation(new MaxValidator($this,['field'=>'username','rule'=>150,'msg'=>'Username should be not more than 150 characters.']));
@@ -146,26 +148,26 @@ class Users extends Model{
         
     }
 
-    public function logout(){
-        $userSession = UserSessions::getFromCookie();
-        if($userSession) $userSession->delete();
+    /**
+     * To logout of the current session
+     *
+     * @param boolean $allDevices pass TRUE to logout of the all devices
+     * @return boolean
+     */
+    public function logout($allDevices = false){
+        if ($allDevices) {
+            UserSessions::deleteSessionsForAllDevice();
+        }else{
+            $userSession = UserSessions::getFromCookie();
+            if($userSession) $userSession->delete();
+        }
         Session::delete(CURRENT_USER_SESSION_NAME);
-        if(Cookie::exists(REMEMBER_ME_COOKIE_NAME)){
-            Cookie::delete(REMEMBER_ME_COOKIE_NAME,REMEMBER_ME_COOKIE_EXPIRY);
+        if (Cookie::exists(REMEMBER_ME_COOKIE_NAME)) {
+            Cookie::delete(REMEMBER_ME_COOKIE_NAME, REMEMBER_ME_COOKIE_EXPIRY);
         }
         self::$currentLoggedInUser = null;
         return true;
-
-    }
-
-    public function logoutAll(){
-        $userSession = UserSessions::deleteCookiesFromAllDevice();
-        Session::delete(CURRENT_USER_SESSION_NAME);
-        if(Cookie::exists(REMEMBER_ME_COOKIE_NAME)){
-            Cookie::delete(REMEMBER_ME_COOKIE_NAME,REMEMBER_ME_COOKEI_EXPIRY);
-        }
-        self::$currentLoggedInUser = null;
-        return true;
+        
     }
 
     public function acls(){

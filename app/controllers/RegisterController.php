@@ -3,6 +3,7 @@
 namespace App\Controllers;
 use Core\Controller;
 use Core\Router;
+use Core\H;
 use App\Models\Users;
 use App\Models\Login;
 class RegisterController extends Controller{
@@ -16,18 +17,16 @@ class RegisterController extends Controller{
         $this->load_model('Users'); //load the Users model
     }
     
-    public function logoutAction($params = ''){
-        if ($params == 'all') {
-            if(Users::currentUser()){
-                Users::currentUser()->logoutAll();
-            }
-        }else{
-            if(Users::currentUser()){
-                Users::currentUser()->logout();
+    public function logoutAction($params = []){
+        $forAllDevice = false;
+        if (Users::currentUser()) {
+            if (!empty($params) && !$params[0] == '') {
+                $forAllDevice = (strtolower($params[0]) === 'all') ? true : false;
+                Users::currentUser()->logout($forAllDevice);
+            }else{
+                Users::currentUser()->logout($forAllDevice);
             }
         }
-        
-        
         Router::redirect('register/login');
     }
     
@@ -74,7 +73,8 @@ class RegisterController extends Controller{
             }
             
             
-        }
+        }   
+            $this->view->postAction = PROJECT_ROOT . 'register/login';
             $this->view->login = $loginModel;
             $this->view->displayErrors = $loginModel->getErrorMessages();
             $this->view->render('register/login');
